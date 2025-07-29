@@ -113,6 +113,7 @@ class _CardWidgetState extends State<CardWidget> {
                   child: IconButton(
                     onPressed: changeIcon,
                     icon: Icon(
+                      size: isClicked ? 20.sp : 18.sp,
                       Iconsax.like_1,
                       color: isClicked
                           ? Colors.white
@@ -123,8 +124,10 @@ class _CardWidgetState extends State<CardWidget> {
               ),
             ],
           ),
+
           Text(
             widget.author,
+            overflow: TextOverflow.ellipsis,
             style: Theme.of(
               context,
             ).textTheme.bodyMedium!.copyWith(color: Color(0xFF595959)),

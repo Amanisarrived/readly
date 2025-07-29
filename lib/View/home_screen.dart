@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:readly/Widget/bottom_navigation.dart';
 import 'package:readly/Widget/search_bar.dart';
 import 'package:readly/Widget/tab_view_widget.dart';
 
@@ -10,6 +11,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: BottomNavigation(),
       body: Padding(
         padding: EdgeInsets.only(top: 60.h, left: 20.w, right: 20.w),
         child: Column(

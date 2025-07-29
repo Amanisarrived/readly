@@ -5,21 +5,21 @@ import 'package:readly/Repo/book_service.dart';
 import 'package:readly/Widget/card_widget.dart';
 import 'package:readly/Widget/shimmer_loading.dart';
 
-class BooksPreview extends StatefulWidget {
-  const BooksPreview({super.key});
+class TrendingBookPreview extends StatefulWidget {
+  const TrendingBookPreview({super.key});
 
   @override
-  State<BooksPreview> createState() => _BooksPreviewState();
+  State<TrendingBookPreview> createState() => _TrendingBookPreviewState();
 }
 
-class _BooksPreviewState extends State<BooksPreview> {
+class _TrendingBookPreviewState extends State<TrendingBookPreview> {
   late Future<List<Book>> booksFuture;
 
   @override
   void initState() {
     // TODO: implement initState
     super.initState();
-    booksFuture = BookService().fetchNewArrivals();
+    booksFuture = BookService().fetchTrendingBooks();
   }
 
   @override
@@ -48,7 +48,6 @@ class _BooksPreviewState extends State<BooksPreview> {
 
         return Container(
           height: 250.h,
-
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: book.length,
