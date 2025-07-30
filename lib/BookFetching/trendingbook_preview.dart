@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/Service/book_service.dart';
-import 'package:readly/Widget/card_widget.dart';
-import 'package:readly/Widget/shimmer_loading.dart';
+import 'package:readly/Widget/allwidget/card_widget.dart';
+import 'package:readly/Widget/allwidget/shimmer_loading.dart';
 
 class TrendingBookPreview extends StatefulWidget {
   const TrendingBookPreview({super.key});

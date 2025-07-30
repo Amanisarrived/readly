@@ -8,54 +8,60 @@ class AllWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 8.h, vertical: 10.h),
-      child: Column(
-        children: [
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "New Arrivals",
-                style: Theme.of(context).textTheme.bodyLarge,
-              ),
+    return SingleChildScrollView(
+      child: Padding(
+        padding: EdgeInsets.symmetric(horizontal: 8.h, vertical: 10.h),
+        child: Column(
+          children: [
+            Padding(
+              padding: EdgeInsets.only(left: 10.w, right: 10.w),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "New Arrivals",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
 
-              Text(
-                "View All",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).primaryColor,
-                ),
+                  Text(
+                    "View All",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          BooksPreview(),
-          SizedBox(height: 15.h), // Spacing between sections
-          Row(
-            crossAxisAlignment: CrossAxisAlignment.baseline,
-            textBaseline: TextBaseline.alphabetic,
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Text(
-                "Trending Books",
-                style: Theme.of(context).textTheme.bodyLarge,
+            ),
+            BooksPreview(),
+            SizedBox(height: 15.h), // Spacing between sections
+            Padding(
+              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Trending Books",
+                    style: Theme.of(context).textTheme.bodyLarge,
+                  ),
+
+                  Text(
+                    "View All",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
               ),
+            ),
+            SizedBox(height: 5.h),
 
-              Text(
-                "View All",
-                style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                  color: Theme.of(context).primaryColor,
-                ),
-              ),
-            ],
-          ),
-          SizedBox(height: 5.h),
-
-          TrendingBookPreview(),
-
-          // Spacing between sections
-        ],
+            TrendingBookPreview(),
+          ],
+        ),
       ),
     );
   }

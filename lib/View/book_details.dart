@@ -2,8 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readly/Widget/book_details_tab.dart';
-import 'package:readly/Widget/release_detal.dart';
+import 'package:readly/Widget/allwidget/book_details_tab.dart';
+import 'package:readly/Widget/allwidget/release_detal.dart';
 
 class BookDetails extends StatelessWidget {
   const BookDetails({
