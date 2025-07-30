@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/Model/book_card.dart';
-import 'package:readly/Repo/book_service.dart';
+import 'package:readly/Service/book_service.dart';
 import 'package:readly/Widget/card_widget.dart';
 import 'package:readly/Widget/shimmer_loading.dart';
 
