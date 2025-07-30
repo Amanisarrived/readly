@@ -45,15 +45,18 @@ class _BooksPreviewState extends State<BooksPreview> {
 
         final book = snapshot.data!;
 
+        final int maxBooks = 8; // Reduce to 8 for memory safety
+        final booksToShow = book.length > maxBooks
+            ? book.sublist(0, maxBooks)
+            : book;
+
         return Container(
           height: 250.h,
-
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: book.length,
+            itemCount: booksToShow.length,
             itemBuilder: (context, index) {
-              final books = book[index];
-
+              final books = booksToShow[index];
               return CardWidget(
                 author: books.author,
                 imageurl: books.imageUrl,
