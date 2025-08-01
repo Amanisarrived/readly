@@ -8,6 +8,9 @@ class BookService {
   final CollectionReference trendingBooksCollection = FirebaseFirestore.instance
       .collection("trending");
 
+  final CollectionReference fantasyBooksCollection = FirebaseFirestore.instance
+      .collection("fantasy");
+
   Future<List<Book>> fetchNewArrivals() async {
     final snapshot = await booksCollection.get();
     return snapshot.docs
@@ -17,6 +20,13 @@ class BookService {
 
   Future<List<Book>> fetchTrendingBooks() async {
     final snapshot = await trendingBooksCollection.get();
+    return snapshot.docs
+        .map((doc) => Book.fromMap(doc.data() as Map<String, dynamic>))
+        .toList();
+  }
+
+  Future<List<Book>> fetchFantasyBooks() async {
+    final snapshot = await fantasyBooksCollection.get();
     return snapshot.docs
         .map((doc) => Book.fromMap(doc.data() as Map<String, dynamic>))
         .toList();

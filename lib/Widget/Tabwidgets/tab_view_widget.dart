@@ -1,10 +1,9 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readly/Widget/Tabwidgets/all_widget.dart';
-import 'package:readly/Widget/Tabwidgets/author_widget.dart';
-import 'package:readly/Widget/Tabwidgets/free_widget.dart';
-import 'package:readly/Widget/Tabwidgets/genre_widget.dart';
+import 'package:readly/Widget/Tabwidgets/AllTab/all_widget.dart';
+import 'package:readly/Widget/Tabwidgets/AuthorTab/author_widget.dart';
+import 'package:readly/Widget/Tabwidgets/Freetab/free_widget.dart';
+import 'package:readly/Widget/Tabwidgets/GenreTab/genre_widget.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
 class TabViewWidget extends StatelessWidget {

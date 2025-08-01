@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/Service/book_service.dart';
-import 'package:readly/Widget/allwidget/card_widget.dart';
-import 'package:readly/Widget/allwidget/shimmer_loading.dart';
+import 'package:readly/Widget/CustomWidget/card_widget.dart';
+import 'package:readly/Widget/CustomWidget/shimmer_loading.dart';
 
 class TrendingBookPreview extends StatefulWidget {
   const TrendingBookPreview({super.key});
@@ -47,7 +47,7 @@ class _TrendingBookPreviewState extends State<TrendingBookPreview> {
         final book = snapshot.data!;
 
         return Container(
-          height: 250.h,
+          height: 265.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
             itemCount: book.length,
@@ -55,6 +55,7 @@ class _TrendingBookPreviewState extends State<TrendingBookPreview> {
               final books = book[index];
 
               return CardWidget(
+                book: books,
                 author: books.author,
                 imageurl: books.imageUrl,
                 title: books.title,

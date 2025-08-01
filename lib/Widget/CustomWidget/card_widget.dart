@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+import 'package:readly/Model/book_card.dart';
 import 'package:readly/View/book_details.dart';
+import 'package:readly/provider/state_provider.dart';
 
 class CardWidget extends StatefulWidget {
   const CardWidget({
@@ -11,6 +14,7 @@ class CardWidget extends StatefulWidget {
     required this.releaseDate,
     required this.rating,
     required this.description,
+    required this.book,
     super.key,
   });
 
@@ -20,20 +24,13 @@ class CardWidget extends StatefulWidget {
   final String releaseDate;
   final String rating;
   final String description;
+  final Book book;
 
   @override
   State<CardWidget> createState() => _CardWidgetState();
 }
 
 class _CardWidgetState extends State<CardWidget> {
-  bool isClicked = false;
-
-  void changeIcon() {
-    setState(() {
-      isClicked = !isClicked;
-    });
-  }
-
   void toDetailScreen() {
     Navigator.push(
       context,
@@ -52,6 +49,9 @@ class _CardWidgetState extends State<CardWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final stateProvider = Provider.of<AllStateProvider>(context, listen: true);
+    final isLiked = stateProvider.isBookLiked(widget.book);
+
     return Padding(
       padding: EdgeInsets.only(right: 20.w, top: 10.h),
       child: Column(
@@ -62,10 +62,6 @@ class _CardWidgetState extends State<CardWidget> {
             onTap: toDetailScreen,
             child: Container(
               decoration: BoxDecoration(
-                border: BoxBorder.all(
-                  color: Theme.of(context).primaryColor.withOpacity(0.2),
-                  width: 3,
-                ),
                 borderRadius: BorderRadius.circular(10.r),
               ),
               height: 169.h,
@@ -84,7 +80,6 @@ class _CardWidgetState extends State<CardWidget> {
                 width: 90.w,
                 child: Text(
                   widget.title,
-
                   overflow: TextOverflow.ellipsis,
                   style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                     fontWeight: FontWeight.bold,
@@ -98,24 +93,28 @@ class _CardWidgetState extends State<CardWidget> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(
-                        0.1,
-                      ), // subtle black shadow
+                      color: Colors.black.withOpacity(0.1),
                       blurRadius: 6,
-                      offset: Offset(2, 2), // slight bottom-right shadow
+                      offset: Offset(2, 2),
                     ),
                   ],
                 ),
                 child: CircleAvatar(
-                  backgroundColor: isClicked
+                  backgroundColor: isLiked
                       ? Theme.of(context).primaryColor
                       : Colors.white,
                   child: IconButton(
-                    onPressed: changeIcon,
+                    onPressed: () {
+                      if (isLiked) {
+                        stateProvider.removeBook(widget.book);
+                      } else {
+                        stateProvider.addBook(widget.book);
+                      }
+                    },
                     icon: Icon(
-                      size: isClicked ? 20.sp : 18.sp,
+                      size: isLiked ? 20.sp : 18.sp,
                       Iconsax.like_1,
-                      color: isClicked
+                      color: isLiked
                           ? Colors.white
                           : Theme.of(context).primaryColor,
                     ),
@@ -124,7 +123,6 @@ class _CardWidgetState extends State<CardWidget> {
               ),
             ],
           ),
-
           Text(
             widget.author,
             overflow: TextOverflow.ellipsis,

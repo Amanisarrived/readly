@@ -3,15 +3,19 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
 class BottomNavigation extends StatefulWidget {
-  const BottomNavigation({super.key});
+  const BottomNavigation({
+    required this.onTabSelected,
+    required this.selectedIndex,
+    super.key,
+  });
+  final int selectedIndex;
+  final ValueChanged<int> onTabSelected;
 
   @override
   State<BottomNavigation> createState() => _BottomNavigationState();
 }
 
 class _BottomNavigationState extends State<BottomNavigation> {
-  int _selectedIndex = 0;
-
   @override
   Widget build(BuildContext context) {
     return Theme(
@@ -23,12 +27,8 @@ class _BottomNavigationState extends State<BottomNavigation> {
         ),
         child: BottomNavigationBar(
           backgroundColor: const Color(0xFFFBFBFB),
-          currentIndex: _selectedIndex,
-          onTap: (index) {
-            setState(() {
-              _selectedIndex = index;
-            });
-          },
+          currentIndex: widget.selectedIndex,
+          onTap: widget.onTabSelected,
           selectedItemColor: Theme.of(context).primaryColor,
           items: const [
             BottomNavigationBarItem(icon: Icon(Iconsax.home), label: "Home"),

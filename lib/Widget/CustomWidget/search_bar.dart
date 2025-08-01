@@ -8,6 +8,7 @@ class SearchBarWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
       children: [
         Expanded(
           child: Container(
@@ -39,7 +40,7 @@ class SearchBarWidget extends StatelessWidget {
                 hintText: "Search by book title or genre",
                 hintStyle: Theme.of(
                   context,
-                ).textTheme.bodySmall!.copyWith(fontSize: 15),
+                ).textTheme.bodySmall!.copyWith(fontSize: 15.sp),
                 border: InputBorder.none,
               ),
             ),

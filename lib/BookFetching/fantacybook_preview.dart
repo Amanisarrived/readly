@@ -5,20 +5,21 @@ import 'package:readly/Service/book_service.dart';
 import 'package:readly/Widget/CustomWidget/card_widget.dart';
 import 'package:readly/Widget/CustomWidget/shimmer_loading.dart';
 
-class BooksPreview extends StatefulWidget {
-  const BooksPreview({super.key});
+class FantasyBookPreview extends StatefulWidget {
+  const FantasyBookPreview({super.key});
 
   @override
-  State<BooksPreview> createState() => _BooksPreviewState();
+  State<FantasyBookPreview> createState() => _FantasyBookPreviewState();
 }
 
-class _BooksPreviewState extends State<BooksPreview> {
+class _FantasyBookPreviewState extends State<FantasyBookPreview> {
   late Future<List<Book>> booksFuture;
 
   @override
   void initState() {
+    // TODO: implement initState
     super.initState();
-    booksFuture = BookService().fetchNewArrivals();
+    booksFuture = BookService().fetchFantasyBooks();
   }
 
   @override
@@ -45,18 +46,14 @@ class _BooksPreviewState extends State<BooksPreview> {
 
         final book = snapshot.data!;
 
-        final int maxBooks = 8; // Reduce to 8 for memory safety
-        final booksToShow = book.length > maxBooks
-            ? book.sublist(0, maxBooks)
-            : book;
-
         return Container(
           height: 265.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,
-            itemCount: booksToShow.length,
+            itemCount: book.length,
             itemBuilder: (context, index) {
-              final books = booksToShow[index];
+              final books = book[index];
+
               return CardWidget(
                 book: books,
                 author: books.author,

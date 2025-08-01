@@ -2,8 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readly/Widget/allwidget/book_details_tab.dart';
-import 'package:readly/Widget/allwidget/release_detal.dart';
+import 'package:readly/Widget/BookWidgets/book_details_tab.dart';
+import 'package:readly/Widget/CustomWidget/custom_btn.dart';
+import 'package:readly/Widget/CustomWidget/release_detal.dart';
 
 class BookDetails extends StatelessWidget {
   const BookDetails({
@@ -62,10 +63,10 @@ class BookDetails extends StatelessWidget {
                           offset: Offset(0, 5), // changes position of shadow
                         ),
                       ],
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                     ),
                     child: ClipRRect(
-                      borderRadius: BorderRadius.circular(15),
+                      borderRadius: BorderRadius.circular(15.r),
                       child: Image.network(
                         imageUrl,
                         height: 250.h,
@@ -77,7 +78,7 @@ class BookDetails extends StatelessWidget {
                   Text(
                     title,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      fontSize: 25,
+                      fontSize: 25.sp,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -93,27 +94,8 @@ class BookDetails extends StatelessWidget {
               ),
             ),
           ),
-          Positioned(
-            bottom: 30.h,
-            left: 40.w,
 
-            child: ElevatedButton(
-              onPressed: () {},
-              style: ElevatedButton.styleFrom(
-                elevation: 20, // Higher value = deeper shadow
-                shadowColor: Color(0xFFF59E0B),
-                backgroundColor: Color(0xFFF59E0B),
-                padding: EdgeInsets.symmetric(
-                  vertical: 15.h,
-                  horizontal: 120.w,
-                ),
-              ),
-              child: Text(
-                "Buy Now",
-                style: TextStyle(fontSize: 14, color: Colors.white),
-              ),
-            ),
-          ),
+          CustomBtn(),
         ],
       ),
     );
