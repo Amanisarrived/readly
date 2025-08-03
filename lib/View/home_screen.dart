@@ -36,7 +36,7 @@ class HomeScreen extends StatelessWidget {
 
           SizedBox(height: 20.h),
 
-          Expanded(child: const TabViewWidget()),
+          const Expanded(child: TabViewWidget()),
         ],
       ),
     );

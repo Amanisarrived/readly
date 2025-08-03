@@ -6,6 +6,7 @@ class Book {
   final String rating;
   final String releaseDate;
   final String catogery;
+  final String bookUrl;
 
   Book({
     required this.title,
@@ -15,6 +16,7 @@ class Book {
     required this.releaseDate,
     required this.rating,
     required this.catogery,
+    required this.bookUrl,
   });
 
   factory Book.fromMap(Map<String, dynamic> map) {
@@ -26,6 +28,7 @@ class Book {
       rating: map["rating"] ?? "",
       releaseDate: map["releaseDate"] ?? "",
       catogery: map["catogery"] ?? "",
+      bookUrl: map["buyUrl"] ?? "",
     );
   }
 

@@ -14,7 +14,11 @@ class ScreenNavigation extends StatefulWidget {
 class _ScreenNavigationState extends State<ScreenNavigation> {
   int _selectedIndex = 0;
 
-  final List<Widget> _pages = [HomeScreen(), LibraryView(), CartView()];
+  final List<Widget> _pages = [
+    const HomeScreen(),
+    const LibraryView(),
+    const CartView(),
+  ];
 
   void _onSelectedTab(int index) {
     setState(() {

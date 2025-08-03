@@ -17,7 +17,6 @@ class _FantasyBookPreviewState extends State<FantasyBookPreview> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     booksFuture = BookService().fetchFantasyBooks();
   }
@@ -46,7 +45,7 @@ class _FantasyBookPreviewState extends State<FantasyBookPreview> {
 
         final book = snapshot.data!;
 
-        return Container(
+        return SizedBox(
           height: 265.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,

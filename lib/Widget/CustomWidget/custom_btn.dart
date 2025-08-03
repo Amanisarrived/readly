@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBtn extends StatelessWidget {
-  const CustomBtn({super.key});
+  const CustomBtn({required this.onPressed, super.key});
+
+  final void Function() onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -11,7 +13,7 @@ class CustomBtn extends StatelessWidget {
       left: 40.w,
 
       child: ElevatedButton(
-        onPressed: () {},
+        onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           elevation: 20, // Higher value = deeper shadow
           shadowColor: const Color(0xFFF59E0B),

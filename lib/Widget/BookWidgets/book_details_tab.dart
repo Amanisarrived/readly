@@ -16,7 +16,7 @@ class BookDetailsTab extends StatelessWidget {
         children: [
           TabBar(
             indicatorColor: Theme.of(context).primaryColor,
-            dividerColor: Color.fromARGB(48, 89, 89, 89),
+            dividerColor: const Color.fromARGB(48, 89, 89, 89),
             indicatorAnimation: TabIndicatorAnimation.elastic,
             unselectedLabelStyle: TextStyle(
               fontSize: 12.sp,
@@ -25,7 +25,7 @@ class BookDetailsTab extends StatelessWidget {
             labelColor: Theme.of(context).primaryColor,
             labelStyle: TextStyle(fontSize: 15.sp),
 
-            tabs: [
+            tabs: const [
               Tab(text: "Summary"),
               Tab(text: "Chapters"),
               Tab(text: "Reviews"),
@@ -36,8 +36,8 @@ class BookDetailsTab extends StatelessWidget {
             child: TabBarView(
               children: [
                 SummaryTab(description: description),
-                ChapterTab(),
-                ReviewTab(),
+                const ChapterTab(),
+                const ReviewTab(),
               ],
             ),
           ),

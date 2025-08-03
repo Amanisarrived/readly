@@ -31,6 +31,10 @@ class AllStateProvider extends ChangeNotifier {
     }
   }
 
+  bool isBookInCart(Book book) {
+    return _cartBooks.contains(book);
+  }
+
   void removeFromCart(Book book) {
     _cartBooks.remove(book);
     notifyListeners();

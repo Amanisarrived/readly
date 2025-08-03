@@ -20,10 +20,7 @@ class ShimmerLoading extends StatelessWidget {
               height: 169.h,
               width: 117.w,
               decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.grey.withOpacity(0.5),
-                  width: 3,
-                ),
+                border: Border.all(color: Colors.grey.withAlpha(128), width: 3),
                 color: Colors.white,
                 borderRadius: BorderRadius.circular(10.r),
               ),
@@ -39,7 +36,7 @@ class ShimmerLoading extends StatelessWidget {
                 Container(
                   height: 32.w,
                   width: 32.w,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     shape: BoxShape.circle,
                     color: Colors.white,
                   ),

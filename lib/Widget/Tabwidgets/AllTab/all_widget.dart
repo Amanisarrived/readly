@@ -34,10 +34,10 @@ class AllWidget extends StatelessWidget {
                 ],
               ),
             ),
-            BooksPreview(),
+            const BooksPreview(),
             SizedBox(height: 15.h), // Spacing between sections
             Padding(
-              padding: const EdgeInsets.only(left: 10.0, right: 10.0),
+              padding: EdgeInsets.only(left: 10.0.w, right: 10.0.w),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 textBaseline: TextBaseline.alphabetic,
@@ -59,7 +59,7 @@ class AllWidget extends StatelessWidget {
             ),
             SizedBox(height: 5.h),
 
-            TrendingBookPreview(),
+            const TrendingBookPreview(),
           ],
         ),
       ),

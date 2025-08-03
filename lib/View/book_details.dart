@@ -2,9 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:provider/provider.dart';
+import 'package:readly/Model/book_card.dart';
 import 'package:readly/Widget/BookWidgets/book_details_tab.dart';
 import 'package:readly/Widget/CustomWidget/custom_btn.dart';
 import 'package:readly/Widget/CustomWidget/release_detal.dart';
+import 'package:readly/provider/state_provider.dart';
 
 class BookDetails extends StatelessWidget {
   const BookDetails({
@@ -14,6 +17,7 @@ class BookDetails extends StatelessWidget {
     required this.releaseDate,
     required this.rating,
     required this.description,
+    required this.book,
     super.key,
   });
 
@@ -23,9 +27,12 @@ class BookDetails extends StatelessWidget {
   final String releaseDate;
   final String rating;
   final String description;
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
+    final allprovider = Provider.of<AllStateProvider>(context);
+    final allreadyInCart = allprovider.isBookInCart(book);
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -60,7 +67,10 @@ class BookDetails extends StatelessWidget {
                           color: Colors.black.withOpacity(0.5), // Shadow color
                           spreadRadius: 2,
                           blurRadius: 10,
-                          offset: Offset(0, 5), // changes position of shadow
+                          offset: const Offset(
+                            0,
+                            5,
+                          ), // changes position of shadow
                         ),
                       ],
                       borderRadius: BorderRadius.circular(15.r),
@@ -69,13 +79,14 @@ class BookDetails extends StatelessWidget {
                       borderRadius: BorderRadius.circular(15.r),
                       child: Image.network(
                         imageUrl,
-                        height: 250.h,
+                        height: 220.h,
                         fit: BoxFit.cover,
                       ),
                     ),
                   ),
                   SizedBox(height: 20.h),
                   Text(
+                    textAlign: TextAlign.center,
                     title,
                     style: Theme.of(context).textTheme.bodyMedium!.copyWith(
                       fontSize: 25.sp,
@@ -95,7 +106,36 @@ class BookDetails extends StatelessWidget {
             ),
           ),
 
-          CustomBtn(),
+          CustomBtn(
+            onPressed: () {
+              if (allreadyInCart) {
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    backgroundColor: Color(0xFFFFE0E0), // light red background
+                    content: Text(
+                      '⚠️ Book is already in your cart!',
+                      style: TextStyle(color: Colors.black),
+                    ),
+                    duration: Duration(seconds: 2),
+                  ),
+                );
+              } else {
+                allprovider.addToCart(book);
+                ScaffoldMessenger.of(context).showSnackBar(
+                  SnackBar(
+                    backgroundColor: const Color(
+                      0xFFE0FFE0,
+                    ), // light green background
+                    content: Text(
+                      '✔️ ${book.title} book added to cart!',
+                      style: const TextStyle(color: Colors.black),
+                    ),
+                    duration: const Duration(seconds: 2),
+                  ),
+                );
+              }
+            },
+          ),
         ],
       ),
     );

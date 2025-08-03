@@ -9,6 +9,7 @@ import 'package:readly/provider/state_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
@@ -25,11 +26,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ScreenUtilInit(
-      designSize: Size(375, 812),
+      designSize: const Size(360, 690),
       minTextAdapt: true,
+      splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          home: ScreenNavigation(),
+          home: const ScreenNavigation(),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
         );

@@ -36,6 +36,7 @@ class _CardWidgetState extends State<CardWidget> {
       context,
       MaterialPageRoute(
         builder: (_) => BookDetails(
+          book: widget.book,
           author: widget.author,
           imageUrl: widget.imageurl,
           title: widget.title,
@@ -67,8 +68,12 @@ class _CardWidgetState extends State<CardWidget> {
               height: 169.h,
               width: 117.w,
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(10.r),
-                child: Image.network(widget.imageurl, width: 200.w),
+                borderRadius: BorderRadiusGeometry.circular(10.r),
+                child: Image.network(
+                  widget.imageurl,
+                  width: 200.w,
+                  fit: BoxFit.cover,
+                ),
               ),
             ),
           ),
@@ -93,9 +98,9 @@ class _CardWidgetState extends State<CardWidget> {
                   shape: BoxShape.circle,
                   boxShadow: [
                     BoxShadow(
-                      color: Colors.black.withOpacity(0.1),
+                      color: Colors.black.withAlpha(25),
                       blurRadius: 6,
-                      offset: Offset(2, 2),
+                      offset: const Offset(2, 2),
                     ),
                   ],
                 ),
@@ -112,7 +117,7 @@ class _CardWidgetState extends State<CardWidget> {
                       }
                     },
                     icon: Icon(
-                      size: isLiked ? 20.sp : 18.sp,
+                      size: isLiked ? 20.r : 18.r,
                       Iconsax.like_1,
                       color: isLiked
                           ? Colors.white
@@ -126,9 +131,10 @@ class _CardWidgetState extends State<CardWidget> {
           Text(
             widget.author,
             overflow: TextOverflow.ellipsis,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium!.copyWith(color: Color(0xFF595959)),
+            style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+              color: const Color(0xFF595959),
+              fontSize: 12.sp,
+            ),
           ),
         ],
       ),

@@ -11,12 +11,18 @@ class SummaryTab extends StatefulWidget {
 
 class _SummaryTabState extends State<SummaryTab> {
   bool isExpanded = false;
+  final ScrollController _scrollController = ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
-      // 👈 Add this here
-      padding: EdgeInsets.symmetric(vertical: 20.h, horizontal: 20.w),
+      controller: _scrollController,
+      padding: EdgeInsets.fromLTRB(
+        20.w,
+        20.h,
+        20.w,
+        80.h,
+      ), // Add extra bottom padding
       child: LayoutBuilder(
         builder: (context, constraints) {
           final textSpan = TextSpan(
@@ -68,6 +74,14 @@ class _SummaryTabState extends State<SummaryTab> {
                   onPressed: () {
                     setState(() {
                       isExpanded = !isExpanded;
+                    });
+                    if (!isExpanded) return;
+                    WidgetsBinding.instance.addPostFrameCallback((_) {
+                      _scrollController.animateTo(
+                        _scrollController.position.maxScrollExtent,
+                        duration: const Duration(milliseconds: 400),
+                        curve: Curves.ease,
+                      );
                     });
                   },
                   child: Text(

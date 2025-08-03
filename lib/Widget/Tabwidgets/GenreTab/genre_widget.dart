@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/BookFetching/fantacybook_preview.dart';
+import 'package:readly/BookFetching/romancebook_preview.dart';
 
 class GenreWidget extends StatelessWidget {
   const GenreWidget({super.key});
@@ -19,7 +20,7 @@ class GenreWidget extends StatelessWidget {
               decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromARGB(92, 8, 21, 55).withOpacity(0.2),
+                    color: const Color.fromARGB(92, 8, 21, 55).withAlpha(51),
                     blurRadius: 12,
                     spreadRadius: 2,
                     offset: const Offset(0, 3),
@@ -60,10 +61,31 @@ class GenreWidget extends StatelessWidget {
             // 📚 Book preview
             Padding(
               padding: EdgeInsets.only(left: 10.w),
-              child: FantasyBookPreview(),
+              child: const FantasyBookPreview(),
             ),
 
-            SizedBox(height: 10.h),
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 20.w),
+              child: Row(
+                crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text("Romance", style: Theme.of(context).textTheme.bodyLarge),
+                  Text(
+                    "View All",
+                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
+                      color: Theme.of(context).primaryColor,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: const RomanceBookPreview(),
+            ),
           ],
         ),
       ),

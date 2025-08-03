@@ -17,7 +17,6 @@ class _TrendingBookPreviewState extends State<TrendingBookPreview> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     booksFuture = BookService().fetchTrendingBooks();
   }
@@ -46,7 +45,7 @@ class _TrendingBookPreviewState extends State<TrendingBookPreview> {
 
         final book = snapshot.data!;
 
-        return Container(
+        return SizedBox(
           height: 265.h,
           child: ListView.builder(
             scrollDirection: Axis.horizontal,

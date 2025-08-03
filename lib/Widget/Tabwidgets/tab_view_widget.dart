@@ -34,7 +34,7 @@ class TabViewWidget extends StatelessWidget {
                 bottomRightRadius: 8.r,
               ),
               tabs: const [
-                Tab(text: "All"),
+                Tab(text: "Trending"),
                 Tab(text: "Genre"),
                 Tab(text: "Author"),
                 Tab(text: "Free"),
@@ -42,10 +42,10 @@ class TabViewWidget extends StatelessWidget {
             ),
 
             /// Tab View should take full remaining height
-            Expanded(
+            const Expanded(
               child: TabBarView(
-                physics: const NeverScrollableScrollPhysics(),
-                children: const [
+                physics: NeverScrollableScrollPhysics(),
+                children: [
                   AllWidget(),
                   GenreWidget(),
                   AuthorWidget(),
