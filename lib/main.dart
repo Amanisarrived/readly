@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import 'package:readly/Theme/app_theme.dart';
 import 'package:readly/View/screen_navigation.dart';
 import 'package:readly/firebase_options.dart';
+import 'package:readly/provider/genre_provider.dart';
 import 'package:readly/provider/state_provider.dart';
 
 void main() async {
@@ -13,8 +14,11 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => AllStateProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (_) => AllStateProvider()),
+        ChangeNotifierProvider(create: (_) => GenreProvider()),
+      ],
       child: const MyApp(),
     ),
   );

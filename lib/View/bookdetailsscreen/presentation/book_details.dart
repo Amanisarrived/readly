@@ -2,11 +2,12 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:readly/Model/book_card.dart';
-import 'package:readly/Widget/BookWidgets/book_details_tab.dart';
-import 'package:readly/Widget/CustomWidget/custom_btn.dart';
-import 'package:readly/Widget/CustomWidget/release_detal.dart';
+import 'package:readly/View/bookdetailsscreen/widgets/tabs/book_details_tab.dart';
+import 'package:readly/Widget/ReusableWidget/custom_btn.dart';
+import 'package:readly/View/bookdetailsscreen/widgets/release_detal.dart';
 import 'package:readly/provider/state_provider.dart';
 
 class BookDetails extends StatelessWidget {
@@ -33,6 +34,7 @@ class BookDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     final allprovider = Provider.of<AllStateProvider>(context);
     final allreadyInCart = allprovider.isBookInCart(book);
+    final cartItem = allprovider.cartBooks.length;
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
@@ -47,9 +49,26 @@ class BookDetails extends StatelessWidget {
           ),
         ),
         actions: [
-          IconButton(
-            onPressed: () {},
-            icon: Icon(Icons.menu_open, color: Theme.of(context).primaryColor),
+          Padding(
+            padding: EdgeInsets.only(right: 10.w),
+            child: Row(
+              children: [
+                const Icon(Iconsax.shopping_cart),
+                SizedBox(width: 5.w),
+                CircleAvatar(
+                  backgroundColor: Theme.of(context).primaryColor,
+                  radius: 14.sp,
+                  child: Text(
+                    cartItem.toString(),
+                    style: TextStyle(
+                      fontSize: 10.sp,
+                      fontWeight: FontWeight.bold,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ],
       ),

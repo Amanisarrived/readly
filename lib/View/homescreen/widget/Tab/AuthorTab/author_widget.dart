@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/BookFetching/fantacybook_preview.dart';
+import 'package:readly/Widget/ReusableWidget/section_title.dart';
 
 class AuthorWidget extends StatelessWidget {
   const AuthorWidget({super.key});
@@ -40,20 +41,11 @@ class AuthorWidget extends StatelessWidget {
 
             // 🔤 Header Row
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Fantasy", style: Theme.of(context).textTheme.bodyLarge),
-                  Text(
-                    "View All",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: const SectionTitle(
+                title: "Author",
+                actionText: "View All",
+                collectionName: "fantasy",
               ),
             ),
 

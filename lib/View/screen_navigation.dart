@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:readly/View/cart_view.dart';
-import 'package:readly/View/home_screen.dart';
-import 'package:readly/View/library_view.dart';
-import 'package:readly/Widget/CustomWidget/bottom_navigation.dart';
+import 'package:readly/View/cartscreen/presentation/cart_view.dart';
+import 'package:readly/View/homescreen/presentation/home_screen.dart';
+import 'package:readly/View/libraryscreen/library_view.dart';
+import 'package:readly/View/homescreen/widget/bottom_navigation.dart';
+import 'package:readly/View/viewallpage/presentation/viewall_screen.dart';
 
 class ScreenNavigation extends StatefulWidget {
   const ScreenNavigation({super.key});
@@ -18,6 +19,7 @@ class _ScreenNavigationState extends State<ScreenNavigation> {
     const HomeScreen(),
     const LibraryView(),
     const CartView(),
+    const ViewallScreen(collectionName: "", genreName: ""),
   ];
 
   void _onSelectedTab(int index) {

@@ -1,47 +1,41 @@
+// ignore_for_file: deprecated_member_use
+
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
-import 'package:readly/Widget/BookWidgets/saved_card.dart';
+import 'package:readly/View/cartscreen/widget/cart_card.dart';
 import 'package:readly/provider/state_provider.dart';
 
-class LibraryView extends StatefulWidget {
-  const LibraryView({super.key});
+class CartView extends StatelessWidget {
+  const CartView({super.key});
 
-  @override
-  State<LibraryView> createState() => _LibraryViewState();
-}
-
-class _LibraryViewState extends State<LibraryView> {
   @override
   Widget build(BuildContext context) {
-    final savedBookProvider = Provider.of<AllStateProvider>(context);
-    final int savedBookscount = savedBookProvider.likedBooks.length;
+    final cartProvider = Provider.of<AllStateProvider>(context);
+    final int cartItem = cartProvider.cartBooks.length;
+
     return Padding(
       padding: EdgeInsets.only(top: 70.h),
       child: Column(
-        mainAxisSize: MainAxisSize.min,
         children: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 20.w),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Text(
-                  "Your Books",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
+                Text("Cart", style: Theme.of(context).textTheme.bodyLarge),
                 Row(
                   children: [
-                    const Icon(Iconsax.book_saved),
+                    const Icon(Iconsax.shopping_cart),
                     SizedBox(width: 5.w),
                     CircleAvatar(
                       backgroundColor: Theme.of(context).primaryColor,
                       radius: 14.sp,
                       child: Text(
-                        savedBookscount.toString(),
+                        cartItem.toString(),
                         style: TextStyle(
                           fontSize: 10.sp,
                           fontWeight: FontWeight.bold,
@@ -54,8 +48,13 @@ class _LibraryViewState extends State<LibraryView> {
               ],
             ),
           ),
-
-          savedBookProvider.likedBooks.isEmpty
+          SizedBox(height: 8.h),
+          Divider(
+            color: Colors.grey.withOpacity(0.5),
+            thickness: 2,
+            height: 20.h,
+          ),
+          cartProvider.cartBooks.isEmpty
               ? Expanded(
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -63,12 +62,13 @@ class _LibraryViewState extends State<LibraryView> {
                       Center(
                         child: Lottie.asset(
                           "assets/images/empty_ghost.json",
+                          animate: true,
                           width: 200.w,
                           height: 120.h,
                         ),
                       ),
                       Text(
-                        "No Books Found!",
+                        "Nothing in your cart!",
                         style: Theme.of(context).textTheme.titleLarge!.copyWith(
                           color: Theme.of(context).primaryColor,
                           fontWeight: FontWeight.bold,
@@ -85,12 +85,15 @@ class _LibraryViewState extends State<LibraryView> {
                       radius: const Radius.circular(12), // Rounded corners
                       interactive: true,
                       scrollbarOrientation: ScrollbarOrientation.right,
-                      thumbColor: Theme.of(context).primaryColor.withAlpha(128),
+                      thumbColor: Theme.of(
+                        context,
+                      ).primaryColor.withOpacity(0.5),
+
                       child: ListView.builder(
                         padding: EdgeInsets.zero,
-                        itemCount: savedBookProvider.likedBooks.length,
+                        itemCount: cartProvider.cartBooks.length,
                         itemBuilder: (context, index) {
-                          final book = savedBookProvider.likedBooks[index];
+                          final book = cartProvider.cartBooks[index];
                           return SizedBox(
                             height: 200.h,
                             child: Slidable(
@@ -104,7 +107,7 @@ class _LibraryViewState extends State<LibraryView> {
                                       bottomLeft: Radius.circular(20.r),
                                     ),
                                     onPressed: (context) {
-                                      savedBookProvider.removeBook(book);
+                                      cartProvider.removeFromCart(book);
                                       ScaffoldMessenger.of(
                                         context,
                                       ).hideCurrentSnackBar();
@@ -113,7 +116,7 @@ class _LibraryViewState extends State<LibraryView> {
                                       ).showSnackBar(
                                         SnackBar(
                                           content: Text(
-                                            '✔️ ${book.title} removed from library!',
+                                            '✔️ ${book.title} removed from Cart!',
                                             style: const TextStyle(
                                               color: Colors.black,
                                             ),
@@ -128,22 +131,18 @@ class _LibraryViewState extends State<LibraryView> {
                                         ),
                                       );
                                     },
-
                                     backgroundColor: Colors.red,
                                     icon: Iconsax.trash,
-                                    label: "Remove",
+                                    label: 'Remove',
                                   ),
                                 ],
                               ),
-                              child: SavedCard(
+                              child: CartCard(
                                 imageUrl: book.imageUrl,
                                 title: book.title,
                                 author: book.author,
-                                rating: book.rating,
                                 catogery: book.catogery,
-                                book: book,
-                                description: book.description,
-                                releaseDate: book.releaseDate,
+                                bookUrl: book.bookUrl,
                               ),
                             ),
                           );

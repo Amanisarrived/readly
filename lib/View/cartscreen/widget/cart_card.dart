@@ -79,7 +79,7 @@ class CartCard extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "Buy",
+                          "Check Price",
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.white,

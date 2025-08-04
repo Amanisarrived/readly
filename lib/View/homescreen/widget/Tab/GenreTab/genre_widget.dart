@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/BookFetching/fantacybook_preview.dart';
 import 'package:readly/BookFetching/romancebook_preview.dart';
+import 'package:readly/BookFetching/thrillerbook_preview.dart';
+import 'package:readly/Widget/ReusableWidget/section_title.dart';
 
 class GenreWidget extends StatelessWidget {
   const GenreWidget({super.key});
@@ -41,20 +43,11 @@ class GenreWidget extends StatelessWidget {
 
             // 🔤 Header Row
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Fantasy", style: Theme.of(context).textTheme.bodyLarge),
-                  Text(
-                    "View All",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: const SectionTitle(
+                title: "Fantasy",
+                actionText: "View All",
+                collectionName: "fantasy",
               ),
             ),
 
@@ -65,26 +58,31 @@ class GenreWidget extends StatelessWidget {
             ),
 
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 20.w),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.baseline,
-                textBaseline: TextBaseline.alphabetic,
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text("Romance", style: Theme.of(context).textTheme.bodyLarge),
-                  Text(
-                    "View All",
-                    style: Theme.of(context).textTheme.bodyMedium!.copyWith(
-                      color: Theme.of(context).primaryColor,
-                    ),
-                  ),
-                ],
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: const SectionTitle(
+                title: "Romance",
+                actionText: "View All",
+                collectionName: "romance",
               ),
             ),
 
             Padding(
               padding: EdgeInsets.only(left: 10.w),
               child: const RomanceBookPreview(),
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: const SectionTitle(
+                title: "Thriller/Fantacy",
+                actionText: "View All",
+                collectionName: "thriller",
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: const ThrillerBookPreview(),
             ),
           ],
         ),

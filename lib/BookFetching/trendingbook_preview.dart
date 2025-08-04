@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/Service/book_service.dart';
-import 'package:readly/Widget/CustomWidget/card_widget.dart';
-import 'package:readly/Widget/CustomWidget/shimmer_loading.dart';
+import 'package:readly/Widget/ReusableWidget/card_widget.dart';
+import 'package:readly/Widget/ReusableWidget/shimmer_loading.dart';
 
 class TrendingBookPreview extends StatefulWidget {
-  const TrendingBookPreview({super.key});
+  const TrendingBookPreview({required this.axis, super.key});
+
+  final Axis axis;
 
   @override
   State<TrendingBookPreview> createState() => _TrendingBookPreviewState();
@@ -48,7 +50,7 @@ class _TrendingBookPreviewState extends State<TrendingBookPreview> {
         return SizedBox(
           height: 265.h,
           child: ListView.builder(
-            scrollDirection: Axis.horizontal,
+            scrollDirection: widget.axis,
             itemCount: book.length,
             itemBuilder: (context, index) {
               final books = book[index];

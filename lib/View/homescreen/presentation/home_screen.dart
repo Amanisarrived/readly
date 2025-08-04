@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
-import 'package:readly/Widget/CustomWidget/search_bar.dart'
-    show SearchBarWidget;
-import 'package:readly/Widget/Tabwidgets/tab_view_widget.dart';
 
-class HomeScreen extends StatelessWidget {
+import 'package:readly/View/homescreen/widget/search_bar.dart'
+    show SearchBarWidget;
+import 'package:readly/View/homescreen/widget/Tab/tab_view_widget.dart';
+
+class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
+  @override
+  State<HomeScreen> createState() => _HomeScreenState();
+}
+
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Padding(

@@ -3,7 +3,8 @@ import 'package:readly/Model/book_card.dart';
 
 class AllStateProvider extends ChangeNotifier {
   final List<Book> _likedBooks = [];
-  final List<Book> _cartBooks = [];
+  final List<Book> _cartBooks =
+      []; // Initialize with a Book instance, adjust constructor as needed
 
   List<Book> get likedBooks => _likedBooks;
   List<Book> get cartBooks => _cartBooks;

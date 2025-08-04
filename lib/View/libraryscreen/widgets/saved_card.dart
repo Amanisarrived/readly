@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:readly/Model/book_card.dart';
-import 'package:readly/View/book_details.dart';
+import 'package:readly/View/bookdetailsscreen/presentation/book_details.dart';
 
 class SavedCard extends StatelessWidget {
   const SavedCard({

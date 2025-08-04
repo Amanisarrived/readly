@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readly/Widget/BookdetailTabs/chapter_tab.dart';
-import 'package:readly/Widget/BookdetailTabs/review_tab.dart';
-import 'package:readly/Widget/BookdetailTabs/summary_tab.dart';
+import 'package:readly/View/bookdetailsscreen/widgets/tabs/chapter_tab.dart';
+import 'package:readly/View/bookdetailsscreen/widgets/tabs/review_tab.dart';
+import 'package:readly/View/bookdetailsscreen/widgets/tabs/summary_tab.dart';
 
 class BookDetailsTab extends StatelessWidget {
   const BookDetailsTab({required this.description, super.key});

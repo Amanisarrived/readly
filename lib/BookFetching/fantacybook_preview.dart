@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/Service/book_service.dart';
-import 'package:readly/Widget/CustomWidget/card_widget.dart';
-import 'package:readly/Widget/CustomWidget/shimmer_loading.dart';
+import 'package:readly/Widget/ReusableWidget/card_widget.dart';
+import 'package:readly/Widget/ReusableWidget/shimmer_loading.dart';
 
 class FantasyBookPreview extends StatefulWidget {
   const FantasyBookPreview({super.key});
