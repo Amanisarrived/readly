@@ -10,9 +10,7 @@ class Socialicons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         GestureDetector(
-          onTap: () {
-            print("Pressed");
-          },
+          onTap: () {},
           child: Container(
             height: 70,
             width: 110,
@@ -24,9 +22,7 @@ class Socialicons extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            print("Pressed");
-          },
+          onTap: () {},
           child: Container(
             height: 70,
             width: 110,

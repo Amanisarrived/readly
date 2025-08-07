@@ -11,7 +11,10 @@ class GenreProvider extends ChangeNotifier {
 
   Future<void> fetchBooksByGenre(String genre) async {
     try {
-      final snapshot = await _firestore.collection(genre).get();
+      final snapshot = await _firestore
+          .collection(genre)
+          .get(const GetOptions(source: Source.server));
+
       final books = snapshot.docs
           // ignore: unnecessary_cast
           .map((doc) => Book.fromMap(doc.data() as Map<String, dynamic>))

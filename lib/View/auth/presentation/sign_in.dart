@@ -1,7 +1,11 @@
+import 'package:readly/View/auth/presentation/login_screen.dart';
+import 'package:readly/provider/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+import 'package:provider/provider.dart';
+import 'package:readly/View/auth/presentation/account_created.dart';
 import 'package:readly/View/auth/widgets/divider_widget.dart';
 import 'package:readly/View/auth/widgets/login_text.dart';
 import 'package:readly/View/auth/widgets/onbording_btn.dart';
@@ -18,6 +22,56 @@ class SignIn extends StatefulWidget {
 class _SignInState extends State<SignIn> {
   bool isPasswordhidden = true;
   bool isConfirmPasswordhidden = true;
+  final emailController = TextEditingController();
+  final passwordController = TextEditingController();
+  final nameController = TextEditingController();
+
+  final confirmPasswordController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String? emailError;
+  String? passwordError;
+
+  //Sign in handler
+  void _handleSignin() async {
+    try {
+      final authProvider = Provider.of<AuthProvider>(context, listen: false);
+      final email = emailController.text.trim();
+      final password = passwordController.text.trim();
+      final name = nameController.text.trim();
+
+      setState(() {
+        emailError = null;
+        passwordError = null;
+      });
+
+      await authProvider.signIn(email, password, name); // ✅ Use signUp
+
+      if (authProvider.errorMessage != null) {
+        final error = authProvider.errorMessage!.toLowerCase();
+
+        setState(() {
+          if (error.contains("email")) {
+            emailError = "Email already registered.";
+          } else if (error.contains("password")) {
+            passwordError = "Incorrect password.";
+          } else {
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(SnackBar(content: Text(authProvider.errorMessage!)));
+          }
+        });
+
+        return;
+      }
+
+      Navigator.push(
+        context,
+        MaterialPageRoute(builder: (_) => const AccountCreated()),
+      );
+    } catch (e) {
+      throw ("❌ Exception in _handleSignin: $e");
+    }
+  }
 
   void isPasswordVisible() {
     setState(() {
@@ -32,86 +86,158 @@ class _SignInState extends State<SignIn> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPasswordController.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authProvider = Provider.of<AuthProvider>(context);
     return Scaffold(
       body: SingleChildScrollView(
-        child: Padding(
-          padding: EdgeInsets.only(top: 40.h),
-          child: Center(
-            child: Column(
-              children: [
-                Container(
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10.r),
+        child: Form(
+          key: _formKey,
+          child: Padding(
+            padding: EdgeInsets.only(top: 20.h),
+            child: Center(
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.r),
+                    ),
+                    child: Image.asset(
+                      "assets/images/readly_logo.png",
+                      height: 100,
+                      width: 180,
+                    ),
                   ),
-                  child: Image.asset(
-                    "assets/images/readly_logo.png",
-                    height: 100,
-                    width: 180,
+                  Gap(10.h),
+                  Text(
+                    "Create Your Account",
+                    style: Theme.of(
+                      context,
+                    ).textTheme.bodyLarge!.copyWith(fontSize: 30.sp),
                   ),
-                ),
-                Gap(10.h),
-                Text(
-                  "Create Your Account",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
-                Gap(1.h),
-                Text(
-                  textAlign: TextAlign.center,
-                  "Start your journey with readly",
-                  style: Theme.of(context).textTheme.bodySmall!.copyWith(
-                    fontSize: 12.sp,
-                    height: 1.5.sp,
-                    color: const Color(0xFF595959),
+                  Gap(1.h),
+                  Text(
+                    textAlign: TextAlign.center,
+                    "Start your journey with readly",
+                    style: Theme.of(context).textTheme.bodySmall!.copyWith(
+                      fontSize: 12.sp,
+                      height: 1.5.sp,
+                      color: const Color(0xFF595959),
+                    ),
                   ),
-                ),
-                Gap(30.h),
-                const TextFeild(
-                  feildtitle: "Email",
-                  obsureText: false,
-                  hinttext: "Example@gmail.com",
-                  keyboardtype: TextInputType.emailAddress,
-                ),
-                Gap(15.h),
-                TextFeild(
-                  feildtitle: "Password",
-                  obsureText: isPasswordhidden,
-                  icon: IconButton(
-                    onPressed: isPasswordVisible,
-                    icon: isPasswordhidden
-                        ? const Icon(Iconsax.eye)
-                        : const Icon(Iconsax.password_check),
+                  Gap(10.h),
+
+                  TextFeild(
+                    obsureText: false,
+                    feildtitle: "Name",
+                    hinttext: "Enter Your name",
+                    controller: nameController,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return "Name is required";
+                      }
+                      return null;
+                    },
                   ),
-                  hinttext: "Enter Password",
-                ),
-                Gap(15.h),
-                TextFeild(
-                  feildtitle: "Confirm Password",
-                  obsureText: isConfirmPasswordhidden,
-                  hinttext: "Confirm Passsword",
-                  icon: IconButton(
-                    onPressed: isConfirmPasswordVisible,
-                    icon: isConfirmPasswordhidden
-                        ? const Icon(Iconsax.eye)
-                        : const Icon(Iconsax.password_check),
+                  Gap(10.h),
+
+                  TextFeild(
+                    errorText: emailError,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Email is required';
+                      }
+                      return null;
+                    },
+                    feildtitle: "Email",
+                    obsureText: false,
+                    hinttext: "Example@gmail.com",
+                    keyboardtype: TextInputType.emailAddress,
+                    controller: emailController,
                   ),
-                ),
-                Gap(20.h),
-                OnbordingBtn(
-                  textcolor: Colors.white,
-                  btntext: "Continue",
-                  onTap: () {},
-                ),
-                Gap(10.h),
-                const LoginText(
-                  text: "Already have an account?  ",
-                  subText: "Log In",
-                ),
-                Gap(10.h),
-                const DividerWidget(),
-                Gap(10.h),
-                const Socialicons(),
-              ],
+                  Gap(10.h),
+                  TextFeild(
+                    errorText: passwordError,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Password is required';
+                      }
+                      if (value.length < 8) {
+                        return "Password must be 8 character long";
+                      }
+                      if (!RegExp(r'^(?=.*[A-Za-z])(?=.*\d)').hasMatch(value)) {
+                        return "Password must contain letters and numbers";
+                      }
+                      return null;
+                    },
+                    controller: passwordController,
+                    feildtitle: "Password",
+                    obsureText: isPasswordhidden,
+                    icon: IconButton(
+                      onPressed: isPasswordVisible,
+                      icon: isPasswordhidden
+                          ? const Icon(Iconsax.eye)
+                          : const Icon(Iconsax.password_check),
+                    ),
+                    hinttext: "Enter Password",
+                  ),
+                  Gap(10.h),
+                  TextFeild(
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Password is required';
+                      }
+                      if (value != passwordController.text.trim()) {
+                        return "Password didn't match";
+                      }
+                      return null;
+                    },
+                    controller: confirmPasswordController,
+                    feildtitle: "Confirm Password",
+                    obsureText: isConfirmPasswordhidden,
+                    hinttext: "Confirm Passsword",
+                    icon: IconButton(
+                      onPressed: isConfirmPasswordVisible,
+                      icon: isConfirmPasswordhidden
+                          ? const Icon(Iconsax.eye)
+                          : const Icon(Iconsax.password_check),
+                    ),
+                  ),
+                  Gap(20.h),
+                  OnbordingBtn(
+                    textcolor: Colors.white,
+                    btntext: "Continue",
+                    isloading: authProvider.isLoading,
+                    onTap: () {
+                      if (_formKey.currentState!.validate()) {
+                        _handleSignin();
+                      }
+                    },
+                  ),
+                  Gap(10.h),
+                  LoginText(
+                    text: "Already have an account?  ",
+                    subText: "Log In",
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (_) => const LoginScreen()),
+                      );
+                    },
+                  ),
+                  Gap(10.h),
+                  const DividerWidget(),
+                  Gap(10.h),
+                  const Socialicons(),
+                ],
+              ),
             ),
           ),
         ),

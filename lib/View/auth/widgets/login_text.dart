@@ -1,12 +1,17 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:readly/View/auth/presentation/login_screen.dart';
 
 class LoginText extends StatelessWidget {
-  const LoginText({required this.text, required this.subText, super.key});
+  const LoginText({
+    required this.onTap,
+    required this.text,
+    required this.subText,
+    super.key,
+  });
 
   final String text;
   final String subText;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
@@ -22,13 +27,7 @@ class LoginText extends StatelessWidget {
               fontWeight: FontWeight.bold,
               decoration: TextDecoration.underline,
             ),
-            recognizer: TapGestureRecognizer()
-              ..onTap = () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (_) => const LoginScreen()),
-                );
-              },
+            recognizer: TapGestureRecognizer()..onTap = onTap,
           ),
         ],
       ),

@@ -1,15 +1,43 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readly/BookFetching/fantacybook_preview.dart';
-import 'package:readly/BookFetching/romancebook_preview.dart';
-import 'package:readly/BookFetching/thrillerbook_preview.dart';
+import 'package:provider/provider.dart';
+import 'package:readly/View/homescreen/widget/Tab/GenreTab/fantasybook_builder.dart';
+import 'package:readly/View/homescreen/widget/Tab/GenreTab/romancebook_builder.dart';
+import 'package:readly/View/homescreen/widget/Tab/GenreTab/thrillerbook_builder.dart';
 import 'package:readly/Widget/ReusableWidget/section_title.dart';
+import 'package:readly/provider/genre_provider.dart';
 
-class GenreWidget extends StatelessWidget {
+class GenreWidget extends StatefulWidget {
   const GenreWidget({super.key});
 
   @override
+  State<GenreWidget> createState() => _GenreWidgetState();
+}
+
+class _GenreWidgetState extends State<GenreWidget> {
+  @override
+  void initState() {
+    super.initState();
+    final genreProvider = Provider.of<GenreProvider>(context, listen: false);
+
+    if (genreProvider.getBooksByGenre("fantasy").isEmpty) {
+      genreProvider.fetchBooksByGenre("fantasy");
+    }
+    if (genreProvider.getBooksByGenre("romance").isEmpty) {
+      genreProvider.fetchBooksByGenre("romance");
+    }
+    if (genreProvider.getBooksByGenre("thriller").isEmpty) {
+      genreProvider.fetchBooksByGenre("thriller");
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final genreProvider = Provider.of<GenreProvider>(context);
+    final fantasyBook = genreProvider.getBooksByGenre("fantasy");
+    final romanceBooks = genreProvider.getBooksByGenre("romance");
+    final thillerBooks = genreProvider.getBooksByGenre("thriller");
+
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(top: 20.h),
@@ -54,7 +82,7 @@ class GenreWidget extends StatelessWidget {
             // 📚 Book preview
             Padding(
               padding: EdgeInsets.only(left: 10.w),
-              child: const FantasyBookPreview(),
+              child: FantasybookBuilder(fantasyBook: fantasyBook),
             ),
 
             Padding(
@@ -68,7 +96,7 @@ class GenreWidget extends StatelessWidget {
 
             Padding(
               padding: EdgeInsets.only(left: 10.w),
-              child: const RomanceBookPreview(),
+              child: RomancebookBuilder(romanceBook: romanceBooks),
             ),
 
             Padding(
@@ -82,7 +110,7 @@ class GenreWidget extends StatelessWidget {
 
             Padding(
               padding: EdgeInsets.only(left: 10.w),
-              child: const ThrillerBookPreview(),
+              child: ThrillerbookBuilder(thrillerBooks: thillerBooks),
             ),
           ],
         ),

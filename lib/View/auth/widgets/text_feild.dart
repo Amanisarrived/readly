@@ -10,6 +10,9 @@ class TextFeild extends StatelessWidget {
     this.icon,
     this.iconBtn,
     this.keyboardtype,
+    required this.controller,
+    this.validator,
+    this.errorText,
     super.key,
   });
 
@@ -19,44 +22,52 @@ class TextFeild extends StatelessWidget {
   final String hinttext;
   final void Function()? iconBtn;
   final TextInputType? keyboardtype;
+  final TextEditingController controller;
+  final FormFieldValidator<String>? validator;
+  final String? errorText;
 
   @override
   Widget build(BuildContext context) {
-    return Form(
-      child: Padding(
-        padding: EdgeInsets.only(left: 20.w, right: 20.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              feildtitle,
-              style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
-            ),
-            Gap(5.h),
-            TextFormField(
-              keyboardType: keyboardtype,
-              obscureText: obsureText,
-              textAlignVertical: TextAlignVertical.center,
-              style: TextStyle(fontSize: 12.sp, color: Colors.black),
-              decoration: InputDecoration(
-                suffixIcon: icon,
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
-                focusColor: Colors.black,
-                hintText: hinttext,
-                hintStyle: TextStyle(fontSize: 12.sp, color: Colors.grey),
-                contentPadding: EdgeInsets.symmetric(
-                  horizontal: 12.w,
-                  vertical: 14.h,
-                ),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(10.r),
-                ),
+    return Padding(
+      padding: EdgeInsets.only(left: 20.w, right: 20.w),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            feildtitle,
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.bold),
+          ),
+          Gap(5.h),
+          TextFormField(
+            validator: validator,
+            controller: controller,
+            keyboardType: keyboardtype,
+            obscureText: obsureText,
+            textAlignVertical: TextAlignVertical.center,
+            style: TextStyle(fontSize: 12.sp, color: Colors.black),
+            decoration: InputDecoration(
+              errorText: errorText,
+              errorStyle: TextStyle(fontSize: 12.sp),
+              errorBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: Color(0xffF20808)),
+              ),
+              suffixIcon: icon,
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.r),
+              ),
+              focusColor: Colors.black,
+              hintText: hinttext,
+              hintStyle: TextStyle(fontSize: 12.sp, color: Colors.grey),
+              contentPadding: EdgeInsets.symmetric(
+                horizontal: 12.w,
+                vertical: 14.h,
+              ),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(10.r),
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

@@ -2,9 +2,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:readly/Service/firestore_uploader.dart';
 import 'package:readly/Theme/app_theme.dart';
 import 'package:readly/View/auth/presentation/onbording_screen.dart';
+import 'package:readly/data/new_arrivals.dart';
 import 'package:readly/firebase_options.dart';
+import 'package:readly/provider/auth_provider.dart';
 import 'package:readly/provider/genre_provider.dart';
 import 'package:readly/provider/state_provider.dart';
 
@@ -12,12 +15,14 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  // await uploadSinlgeBook(newArrivals);
 
   runApp(
     MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => AllStateProvider()),
         ChangeNotifierProvider(create: (_) => GenreProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
       ],
       child: const MyApp(),
     ),

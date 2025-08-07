@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:readly/BookFetching/fantacybook_preview.dart';
 import 'package:readly/Widget/ReusableWidget/section_title.dart';
 
 class AuthorWidget extends StatelessWidget {
@@ -52,7 +51,7 @@ class AuthorWidget extends StatelessWidget {
             // 📚 Book preview
             Padding(
               padding: EdgeInsets.only(left: 10.w),
-              child: const FantasyBookPreview(),
+              child: const Placeholder(),
             ),
 
             SizedBox(height: 10.h),

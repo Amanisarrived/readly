@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
-
+import 'package:provider/provider.dart';
 import 'package:readly/View/homescreen/widget/search_bar.dart'
     show SearchBarWidget;
 import 'package:readly/View/homescreen/widget/Tab/tab_view_widget.dart';
+import 'package:readly/provider/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -16,6 +17,7 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
+    final userName = Provider.of<AuthProvider>(context).userName ?? "User";
     return Padding(
       padding: EdgeInsets.only(top: 60.h),
       child: Column(
@@ -25,7 +27,7 @@ class _HomeScreenState extends State<HomeScreen> {
             child: Row(
               children: [
                 Text(
-                  "Hello, User !",
+                  "Hello $userName",
                   style: Theme.of(context).textTheme.bodyLarge,
                 ),
                 SizedBox(width: 10.w),
@@ -34,7 +36,6 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
           ),
           SizedBox(height: 20.h),
-
           Padding(
             padding: EdgeInsets.only(left: 20.w, right: 20.w),
             child: const SearchBarWidget(),
