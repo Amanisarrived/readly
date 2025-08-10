@@ -14,7 +14,7 @@ class BooksBuilder extends StatelessWidget {
       height: 265.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: newBooks.length,
+        itemCount: 10,
         itemBuilder: (context, index) {
           final books = newBooks[index];
           return CardWidget(

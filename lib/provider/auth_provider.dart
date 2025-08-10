@@ -10,17 +10,28 @@ class AuthProvider extends ChangeNotifier {
   bool _isLoading = false;
   String? _errorMessage;
   String? _userName;
+  bool _isgoogleloginLoading = false;
+  bool _isFirstTimeUser = false;
 
   User? get user => _user;
   bool get isLoading => _isLoading;
   String? get errorMessage => _errorMessage;
-  bool get isLoggedIn => _user != null;
+  bool get isgoogleloginLoading => _isgoogleloginLoading;
   String? get userName => _userName;
+  bool get isFirstTimeUser => _isFirstTimeUser;
 
   AuthProvider() {
     // Listen to auth state changes
-    FirebaseAuth.instance.authStateChanges().listen((user) {
+    FirebaseAuth.instance.authStateChanges().listen((user) async {
       _user = user;
+
+      if (_user != null) {
+        _isFirstTimeUser = await _authService.checkClearFirstTimeFlag(_user!);
+        await loadUserName(); // Load user name automatically on auth change
+      } else {
+        _userName = null;
+        _isFirstTimeUser = false;
+      }
       notifyListeners();
     });
   }
@@ -28,6 +39,10 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(true);
     try {
       _user = await _authService.signin(email, password, name);
+      if (_user != null) {
+        _isFirstTimeUser = await _authService.checkClearFirstTimeFlag(_user!);
+        notifyListeners();
+      }
       _errorMessage = null;
     } catch (e) {
       _errorMessage = e.toString();
@@ -39,6 +54,10 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(true);
     try {
       _user = await _authService.login(email, password);
+      if (_user != null) {
+        _isFirstTimeUser = await _authService.checkClearFirstTimeFlag(_user!);
+        notifyListeners();
+      }
       _errorMessage = null;
     } catch (e) {
       _errorMessage = e.toString();
@@ -69,5 +88,22 @@ class AuthProvider extends ChangeNotifier {
         .get();
     _userName = doc.data()?['name'];
     notifyListeners();
+  }
+
+  Future<void> signInWithGoogle() async {
+    _isgoogleloginLoading = true;
+    notifyListeners();
+
+    try {
+      await _authService.signInWithGoogle();
+    } catch (e) {
+      debugPrint("Sign in failed : $e");
+    }
+    _isgoogleloginLoading = false;
+    notifyListeners();
+  }
+
+  bool isuserLoggedIn() {
+    return _authService.isUserLoggedIn();
   }
 }

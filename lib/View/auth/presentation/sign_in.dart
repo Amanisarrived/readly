@@ -21,12 +21,11 @@ class SignIn extends StatefulWidget {
 
 class _SignInState extends State<SignIn> {
   bool isPasswordhidden = true;
-  bool isConfirmPasswordhidden = true;
+
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final nameController = TextEditingController();
 
-  final confirmPasswordController = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String? emailError;
   String? passwordError;
@@ -55,9 +54,17 @@ class _SignInState extends State<SignIn> {
           } else if (error.contains("password")) {
             passwordError = "Incorrect password.";
           } else {
-            ScaffoldMessenger.of(
-              context,
-            ).showSnackBar(SnackBar(content: Text(authProvider.errorMessage!)));
+            ScaffoldMessenger.of(context).hideCurrentSnackBar();
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  authProvider.errorMessage!,
+                  style: const TextStyle(color: Colors.white),
+                ),
+                behavior: SnackBarBehavior.floating,
+                backgroundColor: Colors.red,
+              ),
+            );
           }
         });
 
@@ -69,7 +76,7 @@ class _SignInState extends State<SignIn> {
         MaterialPageRoute(builder: (_) => const AccountCreated()),
       );
     } catch (e) {
-      throw ("❌ Exception in _handleSignin: $e");
+      throw ("Error $e");
     }
   }
 
@@ -79,18 +86,11 @@ class _SignInState extends State<SignIn> {
     });
   }
 
-  void isConfirmPasswordVisible() {
-    setState(() {
-      isConfirmPasswordhidden = !isConfirmPasswordhidden;
-    });
-  }
-
   @override
   void dispose() {
     super.dispose();
     emailController.dispose();
     passwordController.dispose();
-    confirmPasswordController.dispose();
   }
 
   @override
@@ -101,7 +101,7 @@ class _SignInState extends State<SignIn> {
         child: Form(
           key: _formKey,
           child: Padding(
-            padding: EdgeInsets.only(top: 20.h),
+            padding: EdgeInsets.only(top: 60.h),
             child: Center(
               child: Column(
                 children: [
@@ -154,6 +154,13 @@ class _SignInState extends State<SignIn> {
                       if (value == null || value.isEmpty) {
                         return 'Email is required';
                       }
+                      final emailRegex = RegExp(
+                        r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
+                      );
+                      if (!emailRegex.hasMatch(value)) {
+                        return "Enter a valid email";
+                      }
+
                       return null;
                     },
                     feildtitle: "Email",
@@ -188,28 +195,7 @@ class _SignInState extends State<SignIn> {
                     ),
                     hinttext: "Enter Password",
                   ),
-                  Gap(10.h),
-                  TextFeild(
-                    validator: (value) {
-                      if (value == null || value.isEmpty) {
-                        return 'Password is required';
-                      }
-                      if (value != passwordController.text.trim()) {
-                        return "Password didn't match";
-                      }
-                      return null;
-                    },
-                    controller: confirmPasswordController,
-                    feildtitle: "Confirm Password",
-                    obsureText: isConfirmPasswordhidden,
-                    hinttext: "Confirm Passsword",
-                    icon: IconButton(
-                      onPressed: isConfirmPasswordVisible,
-                      icon: isConfirmPasswordhidden
-                          ? const Icon(Iconsax.eye)
-                          : const Icon(Iconsax.password_check),
-                    ),
-                  ),
+
                   Gap(20.h),
                   OnbordingBtn(
                     textcolor: Colors.white,

@@ -35,8 +35,8 @@ class SavedCard extends StatelessWidget {
 
     //Color for inidcators
     Color getColor(double value) {
-      if (value >= 4) return Theme.of(context).primaryColor;
-      if (value >= 3) return Colors.green;
+      if (value >= 4) return Colors.green;
+      if (value >= 3) return Theme.of(context).primaryColor;
       return Colors.red;
     }
 

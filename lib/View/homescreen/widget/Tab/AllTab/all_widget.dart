@@ -17,6 +17,7 @@ class _AllWidgetState extends State<AllWidget> {
   @override
   void initState() {
     super.initState();
+
     final genreProvider = Provider.of<GenreProvider>(context, listen: false);
     genreProvider.fetchBooksByGenre("books");
     genreProvider.fetchBooksByGenre("trending");

@@ -112,8 +112,14 @@ class _LibraryViewState extends State<LibraryView> {
                                         context,
                                       ).showSnackBar(
                                         SnackBar(
+                                          behavior: SnackBarBehavior.floating,
+                                          shape: const RoundedRectangleBorder(
+                                            borderRadius: BorderRadius.all(
+                                              Radius.circular(12),
+                                            ),
+                                          ),
                                           content: Text(
-                                            '✔️ ${book.title} removed from library!',
+                                            '${book.title} removed from library!',
                                             style: const TextStyle(
                                               color: Colors.black,
                                             ),

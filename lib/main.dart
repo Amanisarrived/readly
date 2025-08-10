@@ -2,10 +2,9 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:readly/Service/firestore_uploader.dart';
 import 'package:readly/Theme/app_theme.dart';
 import 'package:readly/View/auth/presentation/onbording_screen.dart';
-import 'package:readly/data/new_arrivals.dart';
+import 'package:readly/View/screen_navigation.dart';
 import 'package:readly/firebase_options.dart';
 import 'package:readly/provider/auth_provider.dart';
 import 'package:readly/provider/genre_provider.dart';
@@ -40,11 +39,27 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return MaterialApp(
-          home: const OnbordingScreen(),
+          home: const RootScreen(),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
         );
       },
     );
+  }
+}
+
+class RootScreen extends StatelessWidget {
+  const RootScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    final auth = Provider.of<AuthProvider>(context);
+
+    //If user not logged  show on bording screen;
+    if (!auth.isuserLoggedIn()) {
+      return const OnbordingScreen();
+    } else {
+      return const ScreenNavigation();
+    }
   }
 }

@@ -32,6 +32,9 @@ class _ViewallScreenState extends State<ViewallScreen> {
     final books = genreProvider.getBooksByGenre(widget.collectionName);
     return Scaffold(
       appBar: AppBar(
+        elevation: 0,
+        scrolledUnderElevation: 0,
+
         toolbarHeight: 50.h,
         centerTitle: true,
         titleTextStyle: Theme.of(context).textTheme.bodyLarge,

@@ -10,15 +10,10 @@ class GridTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GridView.builder(
+    return ListView.builder(
       itemCount: books.length,
       padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 30.h),
-      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-        crossAxisCount: 2,
-        mainAxisSpacing: 10.h,
-        crossAxisSpacing: 8.w,
-        childAspectRatio: 0.55.sp,
-      ),
+
       itemBuilder: (context, index) {
         final book = books[index];
         return GridCard(
@@ -26,6 +21,8 @@ class GridTileWidget extends StatelessWidget {
           title: book.title,
           book: book,
           author: book.author,
+          releaseDate: book.releaseDate,
+          rating: book.rating,
         );
       },
     );
