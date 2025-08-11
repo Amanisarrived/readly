@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:readly/Model/book_card.dart';
+import 'package:readly/Service/url_service.dart';
 import 'package:readly/View/bookdetailsscreen/widgets/tabs/book_details_tab.dart';
 import 'package:readly/Widget/ReusableWidget/custom_btn.dart';
 import 'package:readly/View/bookdetailsscreen/widgets/release_detal.dart';
@@ -33,7 +34,6 @@ class BookDetails extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final allprovider = Provider.of<AllStateProvider>(context);
-    final allreadyInCart = allprovider.isBookInCart(book);
     final cartItem = allprovider.cartBooks.length;
     return Scaffold(
       appBar: AppBar(
@@ -127,32 +127,7 @@ class BookDetails extends StatelessWidget {
 
           CustomBtn(
             onPressed: () {
-              if (allreadyInCart) {
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    backgroundColor: Color(0xFFFFE0E0), // light red background
-                    content: Text(
-                      '⚠️ Book is already in your cart!',
-                      style: TextStyle(color: Colors.black),
-                    ),
-                    duration: Duration(seconds: 2),
-                  ),
-                );
-              } else {
-                allprovider.addToCart(book);
-                ScaffoldMessenger.of(context).showSnackBar(
-                  SnackBar(
-                    backgroundColor: const Color(
-                      0xFFE0FFE0,
-                    ), // light green background
-                    content: Text(
-                      '✔️ ${book.title} book added to cart!',
-                      style: const TextStyle(color: Colors.black),
-                    ),
-                    duration: const Duration(seconds: 2),
-                  ),
-                );
-              }
+              UrlService().launchBookLink(book.bookUrl);
             },
           ),
         ],

@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await uploadSinlgeBook(newArrivals);
+  // await uploadSinlgeBook(dramaBooks);
 
   runApp(
     MultiProvider(

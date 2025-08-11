@@ -17,7 +17,6 @@ class _AllWidgetState extends State<AllWidget> {
   @override
   void initState() {
     super.initState();
-
     final genreProvider = Provider.of<GenreProvider>(context, listen: false);
     genreProvider.fetchBooksByGenre("books");
     genreProvider.fetchBooksByGenre("trending");
@@ -44,12 +43,7 @@ class _AllWidgetState extends State<AllWidget> {
                     collectionName: "books",
                   ),
                 ),
-                books.isEmpty
-                    ? const SizedBox(
-                        height: 200,
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                    : BooksBuilder(newBooks: books),
+                BooksBuilder(newBooks: books),
 
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 1.w),
@@ -59,13 +53,8 @@ class _AllWidgetState extends State<AllWidget> {
                     collectionName: "trending",
                   ),
                 ),
-                SizedBox(height: 5.h),
-                trendingBooks.isEmpty
-                    ? const SizedBox(
-                        height: 200,
-                        child: Center(child: CircularProgressIndicator()),
-                      )
-                    : TrendingbookBuilder(trendingBooks: trendingBooks),
+
+                TrendingbookBuilder(trendingBooks: trendingBooks),
               ],
             ),
           ),

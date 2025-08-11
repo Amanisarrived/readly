@@ -6,9 +6,15 @@ import 'package:readly/View/homescreen/widget/Tab/Freetab/free_widget.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/genre_widget.dart';
 import 'package:tab_indicator_styler/tab_indicator_styler.dart';
 
-class TabViewWidget extends StatelessWidget {
+class TabViewWidget extends StatefulWidget {
   const TabViewWidget({super.key});
 
+  @override
+  State<TabViewWidget> createState() => _TabViewWidgetState();
+}
+
+class _TabViewWidgetState extends State<TabViewWidget>
+    with SingleTickerProviderStateMixin {
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(

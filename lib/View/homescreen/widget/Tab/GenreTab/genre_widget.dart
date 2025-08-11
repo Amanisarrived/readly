@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:readly/View/homescreen/widget/Tab/GenreTab/dramabook_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/fantasybook_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/romancebook_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/thrillerbook_builder.dart';
+import 'package:readly/View/homescreen/widget/banner_widget.dart';
 import 'package:readly/Widget/ReusableWidget/section_title.dart';
+import 'package:readly/data/books_data.dart';
 import 'package:readly/provider/genre_provider.dart';
 
 class GenreWidget extends StatefulWidget {
@@ -29,6 +32,9 @@ class _GenreWidgetState extends State<GenreWidget> {
     if (genreProvider.getBooksByGenre("thriller").isEmpty) {
       genreProvider.fetchBooksByGenre("thriller");
     }
+    if (genreProvider.getBooksByGenre("drama").isEmpty) {
+      genreProvider.fetchBooksByGenre("drama");
+    }
   }
 
   @override
@@ -37,6 +43,7 @@ class _GenreWidgetState extends State<GenreWidget> {
     final fantasyBook = genreProvider.getBooksByGenre("fantasy");
     final romanceBooks = genreProvider.getBooksByGenre("romance");
     final thillerBooks = genreProvider.getBooksByGenre("thriller");
+    final dramaBooks = genreProvider.getBooksByGenre("drama");
 
     return SingleChildScrollView(
       child: Padding(
@@ -45,25 +52,22 @@ class _GenreWidgetState extends State<GenreWidget> {
           children: [
             // 🔥 Static Image from Firebase Storage
             Container(
-              width: 400.w,
+              width: 390.w,
               height: 150.h,
               decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(12.r),
                 boxShadow: [
                   BoxShadow(
-                    color: const Color.fromARGB(92, 8, 21, 55).withAlpha(51),
+                    color: const Color(0xff081537).withAlpha(80),
                     blurRadius: 12,
                     spreadRadius: 2,
                     offset: const Offset(0, 3),
                   ),
                 ],
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  // ✅ Your manually uploaded image URL
-                  "https://firebasestorage.googleapis.com/v0/b/shoppinglist-823a2.firebasestorage.app/o/posters%2Fgenre_banner.png?alt=media&token=47475698-aad9-4d21-a59e-81b91bb3cc41",
-                  fit: BoxFit.fill,
-                ),
+              child: const BannerWidget(
+                folderName: "Genre",
+                fileName: "genre_poster.png",
               ),
             ),
 
@@ -111,6 +115,20 @@ class _GenreWidgetState extends State<GenreWidget> {
             Padding(
               padding: EdgeInsets.only(left: 10.w),
               child: ThrillerbookBuilder(thrillerBooks: thillerBooks),
+            ),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: const SectionTitle(
+                title: "Drama",
+                actionText: "View All",
+                collectionName: "drama",
+              ),
+            ),
+
+            Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: DramaBookBuilder(dramabook: dramaBooks),
             ),
           ],
         ),

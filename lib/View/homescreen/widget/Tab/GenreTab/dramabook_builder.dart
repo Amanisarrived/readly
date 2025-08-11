@@ -4,10 +4,10 @@ import 'package:readly/Model/book_card.dart';
 import 'package:readly/Widget/ReusableWidget/card_widget.dart';
 import 'package:readly/Widget/ReusableWidget/shimmer_loading.dart';
 
-class TrendingbookBuilder extends StatelessWidget {
-  const TrendingbookBuilder({required this.trendingBooks, super.key});
+class DramaBookBuilder extends StatelessWidget {
+  const DramaBookBuilder({required this.dramabook, super.key});
 
-  final List<Book> trendingBooks;
+  final List<Book> dramabook;
 
   @override
   Widget build(BuildContext context) {
@@ -17,10 +17,10 @@ class TrendingbookBuilder extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) {
-          if (trendingBooks.isEmpty) {
+          if (dramabook.isEmpty) {
             return const ShimmerLoading();
           }
-          final books = trendingBooks[index];
+          final books = dramabook[index];
           return CardWidget(
             book: books,
             author: books.author,

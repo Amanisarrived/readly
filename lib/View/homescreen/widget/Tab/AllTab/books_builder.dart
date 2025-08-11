@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/Widget/ReusableWidget/card_widget.dart';
+import 'package:readly/Widget/ReusableWidget/shimmer_loading.dart';
 
 class BooksBuilder extends StatelessWidget {
   const BooksBuilder({required this.newBooks, super.key});
@@ -16,6 +18,10 @@ class BooksBuilder extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 10,
         itemBuilder: (context, index) {
+          if (newBooks.isEmpty) {
+            // Show shimmer placeholders until data loads
+            return const ShimmerLoading();
+          }
           final books = newBooks[index];
           return CardWidget(
             book: books,

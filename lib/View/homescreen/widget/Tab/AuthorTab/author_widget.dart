@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:readly/View/homescreen/widget/banner_widget.dart';
 import 'package:readly/Widget/ReusableWidget/section_title.dart';
 
 class AuthorWidget extends StatelessWidget {
@@ -28,10 +29,9 @@ class AuthorWidget extends StatelessWidget {
               ),
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.network(
-                  // ✅ Your manually uploaded image URL
-                  "https://firebasestorage.googleapis.com/v0/b/shoppinglist-823a2.firebasestorage.app/o/posters%2Fauthor.png?alt=media&token=ce8e8af5-056d-4a39-867a-a9e80b9d753c",
-                  fit: BoxFit.fill,
+                child: const BannerWidget(
+                  fileName: "author_poster.png",
+                  folderName: "Author",
                 ),
               ),
             ),

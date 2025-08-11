@@ -9,6 +9,7 @@ class CartCard extends StatelessWidget {
     required this.title,
     required this.catogery,
     required this.bookUrl,
+
     super.key,
   });
 
@@ -68,6 +69,7 @@ class CartCard extends StatelessWidget {
                       SizedBox(height: 10.h),
                       Text("Category: $catogery"),
                       SizedBox(height: 15.h),
+
                       ElevatedButton(
                         onPressed: () {
                           UrlService().launchBookLink(bookUrl);

@@ -1,8 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:gap/gap.dart';
 import 'package:iconsax/iconsax.dart';
+
+import 'package:provider/provider.dart';
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/View/bookdetailsscreen/presentation/book_details.dart';
+import 'package:readly/View/libraryscreen/widgets/library_btn.dart';
+
+import 'package:readly/provider/state_provider.dart';
 
 class SavedCard extends StatelessWidget {
   const SavedCard({
@@ -30,6 +36,9 @@ class SavedCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final allprovider = Provider.of<AllStateProvider>(context);
+    final allreadyInCart = allprovider.isBookInCart(book);
+
     final double parsedRating = double.tryParse(rating) ?? 0.0;
     final double progress = (parsedRating.clamp(0, 5)) / 5;
 
@@ -71,15 +80,15 @@ class SavedCard extends StatelessWidget {
                 ClipRRect(
                   borderRadius: BorderRadius.circular(10.r),
                   child: SizedBox(
-                    width: 100.w, // Set your desired fixed width
-                    height: 150.h, // Set your desired fixed height
+                    width: 100.w,
+                    height: 150.h,
                     child: Image.network(imageUrl, fit: BoxFit.cover),
                   ),
                 ),
                 SizedBox(width: 25.w),
                 Expanded(
                   child: Padding(
-                    padding: EdgeInsets.only(top: 10.h), // reduce top padding
+                    padding: EdgeInsets.only(top: 10.h),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
@@ -100,38 +109,51 @@ class SavedCard extends StatelessWidget {
                             context,
                           ).textTheme.bodySmall!.copyWith(fontSize: 13.sp),
                         ),
-                        SizedBox(height: 10.h),
-                        Text("Category: $catogery"),
-                        SizedBox(height: 15.h),
+                        Gap(10.h),
                         Row(
                           children: [
-                            Text("Rating: $rating"),
-                            SizedBox(width: 5.w),
-                            Padding(
-                              padding: EdgeInsets.only(bottom: 2.h),
-                              child: Icon(
-                                Iconsax.star,
-                                color: getColor(parsedRating),
-                                size: 15.sp,
-                              ),
+                            Text("Rating $rating"),
+                            Gap(5.w),
+                            Icon(
+                              Iconsax.star,
+                              color: getColor(parsedRating),
+                              size: 15.sp,
                             ),
                           ],
                         ),
-                        SizedBox(height: 5.h),
-                        ClipRRect(
-                          borderRadius: BorderRadiusGeometry.circular(10.r),
-                          child: SizedBox(
-                            width: 100.w,
-                            height: 8.h,
-                            child: LinearProgressIndicator(
-                              borderRadius: BorderRadius.circular(10.r),
-                              value: progress,
-                              backgroundColor: Colors.grey[300],
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                getColor(parsedRating),
-                              ),
-                            ),
-                          ),
+
+                        SizedBox(height: 10.h),
+                        LibraryBtn(
+                          onPressed: () {
+                            if (allreadyInCart) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  backgroundColor: Color(
+                                    0xFFFFE0E0,
+                                  ), // light red background
+                                  content: Text(
+                                    '⚠️ Book is already in your cart!',
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            } else {
+                              allprovider.addToCart(book);
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  backgroundColor: const Color(
+                                    0xFFE0FFE0,
+                                  ), // light green background
+                                  content: Text(
+                                    '✔️ ${book.title} book added to cart!',
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                                  duration: const Duration(seconds: 2),
+                                ),
+                              );
+                            }
+                          },
                         ),
                       ],
                     ),

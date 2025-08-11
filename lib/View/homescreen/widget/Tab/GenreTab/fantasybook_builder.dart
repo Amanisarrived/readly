@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/Widget/ReusableWidget/card_widget.dart';
+import 'package:readly/Widget/ReusableWidget/shimmer_loading.dart';
 
 class FantasybookBuilder extends StatelessWidget {
   const FantasybookBuilder({required this.fantasyBook, super.key});
@@ -14,8 +15,11 @@ class FantasybookBuilder extends StatelessWidget {
       height: 265.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: fantasyBook.length,
+        itemCount: 10,
         itemBuilder: (context, index) {
+          if (fantasyBook.isEmpty) {
+            return const ShimmerLoading();
+          }
           final books = fantasyBook[index];
           return CardWidget(
             book: books,
