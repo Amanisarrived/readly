@@ -10,21 +10,29 @@ class GridTileWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
-      itemCount: books.length,
-      padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 30.h),
+    return RawScrollbar(
+      trackVisibility: true,
+      thickness: 6, // Width of scrollbar
+      radius: const Radius.circular(12), // Rounded corners
+      interactive: true,
+      scrollbarOrientation: ScrollbarOrientation.right,
+      thumbColor: Theme.of(context).primaryColor.withAlpha(128),
+      child: ListView.builder(
+        itemCount: books.length,
+        padding: EdgeInsets.symmetric(horizontal: 0.w, vertical: 30.h),
 
-      itemBuilder: (context, index) {
-        final book = books[index];
-        return GridCard(
-          imageUrl: book.imageUrl,
-          title: book.title,
-          book: book,
-          author: book.author,
-          releaseDate: book.releaseDate,
-          rating: book.rating,
-        );
-      },
+        itemBuilder: (context, index) {
+          final book = books[index];
+          return GridCard(
+            imageUrl: book.imageUrl,
+            title: book.title,
+            book: book,
+            author: book.author,
+            releaseDate: book.releaseDate,
+            rating: book.rating,
+          );
+        },
+      ),
     );
   }
 }

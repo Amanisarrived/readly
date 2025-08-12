@@ -43,7 +43,7 @@ class ReleaseDetails extends StatelessWidget {
             ),
           ],
         ),
-        SizedBox(height: 13.h),
+        SizedBox(height: 8.h),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [

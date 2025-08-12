@@ -4,10 +4,10 @@ import 'package:readly/Model/book_card.dart';
 import 'package:readly/Widget/ReusableWidget/card_widget.dart';
 import 'package:readly/Widget/ReusableWidget/shimmer_loading.dart';
 
-class RomancebookBuilder extends StatelessWidget {
-  const RomancebookBuilder({required this.romanceBook, super.key});
+class SelfHeloBookBuilder extends StatelessWidget {
+  const SelfHeloBookBuilder({required this.selfhelpbooks, super.key});
 
-  final List<Book> romanceBook;
+  final List<Book> selfhelpbooks;
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,12 @@ class RomancebookBuilder extends StatelessWidget {
       height: 265.h,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount: 10,
         itemBuilder: (context, index) {
-          if (romanceBook.isEmpty) {
-            // Show shimmer placeholders until data loads
+          if (selfhelpbooks.isEmpty) {
             return const ShimmerLoading();
           }
-          final books = romanceBook[index];
+          final books = selfhelpbooks[index];
           return CardWidget(
             book: books,
             author: books.author,

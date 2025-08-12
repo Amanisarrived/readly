@@ -56,7 +56,7 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       if (mounted) {
         await authProvider.loadUserName();
-        Navigator.push(
+        Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (_) => const ScreenNavigation()),
         );

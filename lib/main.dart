@@ -14,7 +14,7 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  // await uploadSinlgeBook(dramaBooks);
+  // await uploadSinlgeBook(colleenHover);
 
   runApp(
     MultiProvider(
@@ -42,6 +42,7 @@ class MyApp extends StatelessWidget {
           home: const RootScreen(),
           debugShowCheckedModeBanner: false,
           theme: AppTheme.lightTheme,
+          themeMode: ThemeMode.system,
         );
       },
     );

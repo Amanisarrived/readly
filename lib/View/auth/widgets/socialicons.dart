@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:readly/View/screen_navigation.dart';
 import 'package:readly/provider/auth_provider.dart';
 
 class Socialicons extends StatelessWidget {
@@ -13,7 +14,15 @@ class Socialicons extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         GestureDetector(
-          onTap: authProvider.signInWithGoogle,
+          onTap: () async {
+            final success = await authProvider.signInWithGoogle();
+            if (success) {
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(builder: (_) => const ScreenNavigation()),
+              );
+            }
+          },
           child: authProvider.isgoogleloginLoading
               ? const CircularProgressIndicator()
               : Container(

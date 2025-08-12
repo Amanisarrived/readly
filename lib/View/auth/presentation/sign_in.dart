@@ -71,7 +71,7 @@ class _SignInState extends State<SignIn> {
         return;
       }
 
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => const AccountCreated()),
       );

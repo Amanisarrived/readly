@@ -4,10 +4,10 @@ import 'package:provider/provider.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/dramabook_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/fantasybook_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/romancebook_builder.dart';
+import 'package:readly/View/homescreen/widget/Tab/GenreTab/selfhelo_book_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/GenreTab/thrillerbook_builder.dart';
 import 'package:readly/View/homescreen/widget/banner_widget.dart';
 import 'package:readly/Widget/ReusableWidget/section_title.dart';
-import 'package:readly/data/books_data.dart';
 import 'package:readly/provider/genre_provider.dart';
 
 class GenreWidget extends StatefulWidget {
@@ -35,6 +35,9 @@ class _GenreWidgetState extends State<GenreWidget> {
     if (genreProvider.getBooksByGenre("drama").isEmpty) {
       genreProvider.fetchBooksByGenre("drama");
     }
+    if (genreProvider.getBooksByGenre("selfhelp").isEmpty) {
+      genreProvider.fetchBooksByGenre("selfhelp");
+    }
   }
 
   @override
@@ -44,6 +47,7 @@ class _GenreWidgetState extends State<GenreWidget> {
     final romanceBooks = genreProvider.getBooksByGenre("romance");
     final thillerBooks = genreProvider.getBooksByGenre("thriller");
     final dramaBooks = genreProvider.getBooksByGenre("drama");
+    final selfhelp = genreProvider.getBooksByGenre("selfhelp");
 
     return SingleChildScrollView(
       child: Padding(
@@ -71,7 +75,22 @@ class _GenreWidgetState extends State<GenreWidget> {
               ),
             ),
 
-            SizedBox(height: 10.h),
+            SizedBox(height: 18.h),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: const SectionTitle(
+                title: "Self Help",
+                actionText: "View All",
+                collectionName: "selfhelp",
+              ),
+            ),
+
+            // 📚 Book preview
+            Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: SelfHeloBookBuilder(selfhelpbooks: selfhelp),
+            ),
 
             // 🔤 Header Row
             Padding(

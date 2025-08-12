@@ -6,6 +6,7 @@ import 'package:readly/View/homescreen/widget/setting_screen.dart';
 import 'package:readly/View/homescreen/widget/search_bar.dart'
     show SearchBarWidget;
 import 'package:readly/View/homescreen/widget/Tab/tab_view_widget.dart';
+import 'package:readly/Widget/ReusableWidget/shimmer_name_loading.dart';
 import 'package:readly/provider/auth_provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -39,7 +40,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final userName = Provider.of<AuthProvider>(context).userName ?? "User";
+    final userName = Provider.of<AuthProvider>(context).userName;
     return Padding(
       padding: EdgeInsets.only(top: 60.h),
       child: Column(
@@ -48,10 +49,12 @@ class _HomeScreenState extends State<HomeScreen> {
             padding: EdgeInsets.only(left: 20.w, right: 20.w),
             child: Row(
               children: [
-                Text(
-                  "Hello $userName",
-                  style: Theme.of(context).textTheme.bodyLarge,
-                ),
+                userName == null
+                    ? ShimmerNameLoading(width: 90.w, height: 18.h)
+                    : Text(
+                        "Hello $userName",
+                        style: Theme.of(context).textTheme.bodyLarge,
+                      ),
                 SizedBox(width: 10.w),
                 Icon(Iconsax.user_tick4, size: 23.sp),
                 const Spacer(),

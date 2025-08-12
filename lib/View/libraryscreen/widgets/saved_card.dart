@@ -40,7 +40,7 @@ class SavedCard extends StatelessWidget {
     final allreadyInCart = allprovider.isBookInCart(book);
 
     final double parsedRating = double.tryParse(rating) ?? 0.0;
-    final double progress = (parsedRating.clamp(0, 5)) / 5;
+    // final double progress = (parsedRating.clamp(0, 5)) / 5;
 
     //Color for inidcators
     Color getColor(double value) {

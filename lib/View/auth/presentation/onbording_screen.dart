@@ -67,7 +67,7 @@ class OnbordingScreen extends StatelessWidget {
                 btntext: "Start Reading Today",
                 textcolor: Colors.white,
                 onTap: () {
-                  Navigator.push(
+                  Navigator.pushReplacement(
                     context,
                     MaterialPageRoute(builder: (_) => const SignIn()),
                   );

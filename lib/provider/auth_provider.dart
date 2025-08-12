@@ -12,6 +12,7 @@ class AuthProvider extends ChangeNotifier {
   String? _userName;
   bool _isgoogleloginLoading = false;
   bool _isFirstTimeUser = false;
+  String? _emailOrName;
 
   User? get user => _user;
   bool get isLoading => _isLoading;
@@ -19,6 +20,7 @@ class AuthProvider extends ChangeNotifier {
   bool get isgoogleloginLoading => _isgoogleloginLoading;
   String? get userName => _userName;
   bool get isFirstTimeUser => _isFirstTimeUser;
+  String? get emailOrName => _emailOrName;
 
   AuthProvider() {
     // Listen to auth state changes
@@ -27,7 +29,7 @@ class AuthProvider extends ChangeNotifier {
 
       if (_user != null) {
         _isFirstTimeUser = await _authService.checkClearFirstTimeFlag(_user!);
-        await loadUserName(); // Load user name automatically on auth change
+        await loadUserName();
       } else {
         _userName = null;
         _isFirstTimeUser = false;
@@ -65,12 +67,19 @@ class AuthProvider extends ChangeNotifier {
     _setLoading(false);
   }
 
-  Future<void> signOut() async {
+  Future<bool> signOut() async {
     _setLoading(true);
-    await _authService.signOut();
-    _user = null;
-    _errorMessage = null;
-    _setLoading(false);
+    try {
+      await _authService.signOut();
+      _user = null;
+      _errorMessage = null;
+      return true; // ✅ success
+    } catch (e) {
+      _errorMessage = e.toString();
+      return false; // ❌ failed
+    } finally {
+      _setLoading(false);
+    }
   }
 
   void _setLoading(bool value) {
@@ -90,16 +99,61 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> signInWithGoogle() async {
+  Future<bool> signInWithGoogle() async {
     _isgoogleloginLoading = true;
     notifyListeners();
 
     try {
       await _authService.signInWithGoogle();
+      _isgoogleloginLoading = false;
+      notifyListeners();
+      return true; // login success
     } catch (e) {
       debugPrint("Sign in failed : $e");
+      _isgoogleloginLoading = false;
+      notifyListeners();
+      return false; // login failed
     }
-    _isgoogleloginLoading = false;
+  }
+
+  Future<void> loadEmail() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    final doc = await FirebaseFirestore.instance
+        .collection('users')
+        .doc(uid)
+        .get();
+    _userName = doc.data()?['email'];
+    notifyListeners();
+  }
+
+  Future<void> loadEmailOrName() async {
+    final uid = FirebaseAuth.instance.currentUser?.uid;
+    if (uid == null) return;
+
+    try {
+      final doc = await FirebaseFirestore.instance
+          .collection('users')
+          .doc(uid)
+          .get();
+      if (doc.exists) {
+        final data = doc.data()!;
+        _emailOrName =
+            (data['email'] != null && data['email'].toString().isNotEmpty)
+            ? data['email']
+            : (data['username'] != null &&
+                  data['username'].toString().isNotEmpty)
+            ? data['username']
+            : "No info available";
+      } else {
+        _emailOrName = "No info available";
+      }
+    } catch (e) {
+      debugPrint("Error loading email or name: $e");
+      _emailOrName = "No info available";
+    }
+
     notifyListeners();
   }
 
