@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 Future<void> uploadSinlgeBook(List<Map<String, dynamic>> bookdata) async {
-  final collection = FirebaseFirestore.instance.collection("colleenHover");
+  final collection = FirebaseFirestore.instance.collection("george");
 
   for (var bookData in bookdata) {
     await collection.add(bookData);

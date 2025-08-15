@@ -7,6 +7,7 @@ class Book {
   final String releaseDate;
   final String catogery;
   final String bookUrl;
+  final bool isFree;
 
   Book({
     required this.title,
@@ -17,6 +18,7 @@ class Book {
     required this.rating,
     required this.catogery,
     required this.bookUrl,
+    this.isFree = false,
   });
 
   factory Book.fromMap(Map<String, dynamic> map) {
@@ -25,11 +27,27 @@ class Book {
       author: map['author'] ?? '',
       imageUrl: map['imageUrl'] ?? '',
       description: map["description"] ?? "",
+
       rating: map["rating"] ?? "",
       releaseDate: map["releaseDate"] ?? "",
       catogery: map["catogery"] ?? "",
       bookUrl: map["buyUrl"] ?? "",
+      isFree: map["isFree"] ?? false,
     );
+  }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'title': title,
+      'author': author,
+      'imageUrl': imageUrl,
+      'description': description,
+      'rating': rating,
+      'releaseDate': releaseDate,
+      'catogery': catogery,
+      'buyUrl': bookUrl,
+      "isFree": isFree,
+    };
   }
 
   @override

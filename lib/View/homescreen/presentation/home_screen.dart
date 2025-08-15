@@ -8,6 +8,7 @@ import 'package:readly/View/homescreen/widget/search_bar.dart'
 import 'package:readly/View/homescreen/widget/Tab/tab_view_widget.dart';
 import 'package:readly/Widget/ReusableWidget/shimmer_name_loading.dart';
 import 'package:readly/provider/auth_provider.dart';
+import 'package:readly/provider/state_provider.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -35,6 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
         // After user responds, flag is already cleared in Firestore & provider
       }
+      Provider.of<AllStateProvider>(context, listen: false).loadUserBooks();
     });
   }
 
@@ -83,7 +85,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(height: 20.h),
           Padding(
             padding: EdgeInsets.only(left: 20.w, right: 20.w),
-            child: const SearchBarWidget(),
+            child: SearchBarWidget(onChnaged: (value) {}),
           ),
 
           SizedBox(height: 20.h),

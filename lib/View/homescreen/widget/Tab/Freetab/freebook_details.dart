@@ -5,15 +5,12 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:provider/provider.dart';
 import 'package:readly/Model/book_card.dart';
-import 'package:readly/Service/url_service.dart';
 import 'package:readly/View/bookdetailsscreen/widgets/tabs/book_details_tab.dart';
-import 'package:readly/View/epubviewer/epubreader.dart';
-import 'package:readly/Widget/ReusableWidget/custom_btn.dart';
 import 'package:readly/View/bookdetailsscreen/widgets/release_detal.dart';
 import 'package:readly/provider/state_provider.dart';
 
-class BookDetails extends StatelessWidget {
-  const BookDetails({
+class FreeBookDetails extends StatelessWidget {
+  const FreeBookDetails({
     required this.author,
     required this.imageUrl,
     required this.title,
@@ -76,7 +73,7 @@ class BookDetails extends StatelessWidget {
       body: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.only(top: 1.h),
+            padding: EdgeInsets.only(top: 20.h),
             child: Center(
               child: Column(
                 children: [
@@ -126,21 +123,11 @@ class BookDetails extends StatelessWidget {
             ),
           ),
 
-          CustomBtn(
-            text: book.isFree ? "Read" : "Check Prices",
-            onPressed: () {
-              if (book.isFree) {
-                UrlService().launchBookLink(book.bookUrl);
-              } else {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) =>
-                        EpubReaderScreen(epubUrl: book.bookUrl, title: title),
-                  ),
-                );
-              }
-            },
+          Positioned(
+            child: ElevatedButton(
+              onPressed: () {},
+              child: const Text("Download"),
+            ),
           ),
         ],
       ),

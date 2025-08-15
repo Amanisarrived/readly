@@ -2,9 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomBtn extends StatelessWidget {
-  const CustomBtn({required this.onPressed, super.key});
+  const CustomBtn({required this.onPressed, super.key, required this.text});
 
   final void Function() onPressed;
+  final String text;
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +24,7 @@ class CustomBtn extends StatelessWidget {
           padding: EdgeInsets.symmetric(vertical: 10.h, horizontal: 100.w),
         ),
         child: Text(
-          "Check Price",
+          text,
           style: TextStyle(fontSize: 14.sp, color: Colors.white),
         ),
       ),

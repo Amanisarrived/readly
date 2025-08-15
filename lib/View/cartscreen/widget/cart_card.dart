@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:readly/Model/book_card.dart';
 import 'package:readly/Service/url_service.dart';
+import 'package:readly/View/epubviewer/epubreader.dart';
+import 'package:readly/View/libraryscreen/library_view.dart';
 
 class CartCard extends StatelessWidget {
   const CartCard({
@@ -9,6 +12,7 @@ class CartCard extends StatelessWidget {
     required this.title,
     required this.catogery,
     required this.bookUrl,
+    required this.book,
 
     super.key,
   });
@@ -18,6 +22,7 @@ class CartCard extends StatelessWidget {
   final String author;
   final String catogery;
   final String bookUrl;
+  final Book book;
 
   @override
   Widget build(BuildContext context) {
@@ -72,7 +77,19 @@ class CartCard extends StatelessWidget {
 
                       ElevatedButton(
                         onPressed: () {
-                          UrlService().launchBookLink(bookUrl);
+                          if (book.isFree) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (_) => EpubReaderScreen(
+                                  epubUrl: book.bookUrl,
+                                  title: title,
+                                ),
+                              ),
+                            );
+                          } else {
+                            UrlService().launchBookLink(bookUrl);
+                          }
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Theme.of(context).primaryColor,
@@ -81,7 +98,7 @@ class CartCard extends StatelessWidget {
                           ),
                         ),
                         child: Text(
-                          "Check Price",
+                          book.isFree ? "Download" : "Check Price",
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.white,

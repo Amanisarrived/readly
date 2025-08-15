@@ -2,9 +2,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:iconsax/iconsax.dart';
 
-class SearchBarWidget extends StatelessWidget {
-  const SearchBarWidget({super.key});
+class SearchBarWidget extends StatefulWidget {
+  const SearchBarWidget({super.key, required this.onChnaged});
 
+  final void Function(String) onChnaged;
+
+  @override
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
+}
+
+class _SearchBarWidgetState extends State<SearchBarWidget> {
   @override
   Widget build(BuildContext context) {
     return Row(
@@ -22,6 +29,7 @@ class SearchBarWidget extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: TextField(
+              onChanged: widget.onChnaged,
               textAlign: TextAlign.start, // 👈 Center text input
               style: Theme.of(context).textTheme.bodySmall,
               decoration: InputDecoration(

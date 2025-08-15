@@ -96,6 +96,7 @@ class _SignInState extends State<SignIn> {
   @override
   Widget build(BuildContext context) {
     final authProvider = Provider.of<AuthProvider>(context);
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Form(

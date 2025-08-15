@@ -143,6 +143,7 @@ class CartView extends StatelessWidget {
                                 author: book.author,
                                 catogery: book.catogery,
                                 bookUrl: book.bookUrl,
+                                book: book,
                               ),
                             ),
                           );
