@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
+import 'package:readly/View/homescreen/widget/Tab/AuthorTab/agathaChristieBooks_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/AuthorTab/collenhover_books.dart';
 import 'package:readly/View/homescreen/widget/Tab/AuthorTab/georgebook_builder.dart';
 import 'package:readly/View/homescreen/widget/Tab/AuthorTab/jkrowlingbook_builder.dart';
@@ -30,6 +31,9 @@ class _AuthorWidgetState extends State<AuthorWidget> {
     if (genreProvider.getBooksByGenre("george").isEmpty) {
       genreProvider.fetchBooksByGenre("george");
     }
+    if (genreProvider.getBooksByGenre("agathaChristieBooks").isEmpty) {
+      genreProvider.fetchBooksByGenre("agathaChristieBooks");
+    }
   }
 
   @override
@@ -38,6 +42,9 @@ class _AuthorWidgetState extends State<AuthorWidget> {
     final colleenHover = genreProvider.getBooksByGenre("colleenHover");
     final jkrowling = genreProvider.getBooksByGenre("jkrowling");
     final george = genreProvider.getBooksByGenre("george");
+    final agathaChristieBooks = genreProvider.getBooksByGenre(
+      "agathaChristieBooks",
+    );
     return SingleChildScrollView(
       child: Padding(
         padding: EdgeInsets.only(top: 20.h),
@@ -115,6 +122,23 @@ class _AuthorWidgetState extends State<AuthorWidget> {
             ),
 
             SizedBox(height: 10.h),
+
+            Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10.w),
+              child: const SectionTitle(
+                title: "Agatha Christie",
+                actionText: "View All",
+                collectionName: "agathaChristieBooks",
+              ),
+            ),
+
+            // 📚 Book preview
+            Padding(
+              padding: EdgeInsets.only(left: 10.w),
+              child: AgathachristiebooksBuilder(
+                agathaChristieBooks: agathaChristieBooks,
+              ),
+            ),
           ],
         ),
       ),

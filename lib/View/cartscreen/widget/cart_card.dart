@@ -3,7 +3,6 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/Model/book_card.dart';
 import 'package:readly/Service/url_service.dart';
 import 'package:readly/View/epubviewer/epubreader.dart';
-import 'package:readly/View/libraryscreen/library_view.dart';
 
 class CartCard extends StatelessWidget {
   const CartCard({
@@ -81,7 +80,7 @@ class CartCard extends StatelessWidget {
                             Navigator.push(
                               context,
                               MaterialPageRoute(
-                                builder: (_) => EpubReaderScreen(
+                                builder: (_) => SimpleEpubReader(
                                   epubUrl: book.bookUrl,
                                   title: title,
                                 ),

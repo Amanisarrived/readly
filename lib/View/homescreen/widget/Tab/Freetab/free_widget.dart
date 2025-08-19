@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:readly/View/homescreen/widget/Tab/AuthorTab/collenhover_books.dart';
 import 'package:readly/View/homescreen/widget/Tab/Freetab/free_romance_builder.dart';
 import 'package:readly/View/homescreen/widget/banner_widget.dart';
 import 'package:readly/Widget/ReusableWidget/section_title.dart';
@@ -49,10 +48,10 @@ class _FreeWidgetState extends State<FreeWidget> {
                 ],
               ),
               child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
+                borderRadius: BorderRadius.circular(0),
                 child: const BannerWidget(
-                  fileName: "author_poster (1).png",
-                  folderName: "Author",
+                  fileName: "free_banner.png",
+                  folderName: "Free",
                 ),
               ),
             ),
@@ -63,7 +62,7 @@ class _FreeWidgetState extends State<FreeWidget> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: const SectionTitle(
-                title: "Romance",
+                title: "Free Books",
                 actionText: "View All",
                 collectionName: "freebooks",
               ),

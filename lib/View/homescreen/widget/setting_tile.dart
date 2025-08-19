@@ -20,7 +20,7 @@ class SettingTile extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        Icon(icon, size: 25.sp, color: Color(0xff595959)),
+        Icon(icon, size: 25.sp, color: const Color(0xff595959)),
         Gap(10.w),
         Text(
           title,

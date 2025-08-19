@@ -130,15 +130,15 @@ class BookDetails extends StatelessWidget {
             text: book.isFree ? "Read" : "Check Prices",
             onPressed: () {
               if (book.isFree) {
-                UrlService().launchBookLink(book.bookUrl);
-              } else {
                 Navigator.push(
                   context,
                   MaterialPageRoute(
                     builder: (_) =>
-                        EpubReaderScreen(epubUrl: book.bookUrl, title: title),
+                        SimpleEpubReader(epubUrl: book.bookUrl, title: title),
                   ),
                 );
+              } else {
+                UrlService().launchBookLink(book.bookUrl);
               }
             },
           ),

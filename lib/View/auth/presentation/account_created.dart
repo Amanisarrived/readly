@@ -14,7 +14,7 @@ class AccountCreated extends StatelessWidget {
       body: Stack(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 50.h),
+            padding: EdgeInsets.only(top: 50.h),
             child: Center(
               child: Column(
                 children: [

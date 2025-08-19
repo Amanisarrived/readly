@@ -57,7 +57,11 @@ class AllStateProvider extends ChangeNotifier {
   }
 
   Future<void> loadUserBooks() async {
-    final doc = await _firestore.collection('users').doc(_userId).get();
+    final user = FirebaseAuth.instance.currentUser;
+    if (user == null) return; // safeguard
+
+    final doc = await _firestore.collection('users').doc(user.uid).get();
+
     if (doc.exists) {
       final data = doc.data()!;
       _likedBooks

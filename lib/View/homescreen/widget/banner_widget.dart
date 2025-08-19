@@ -31,7 +31,7 @@ class BannerWidget extends StatelessWidget {
         }
 
         return ClipRRect(
-          borderRadius: BorderRadius.circular(12),
+          borderRadius: BorderRadius.circular(0),
           child: Image.network(snapshot.data!, fit: BoxFit.cover),
         );
       },

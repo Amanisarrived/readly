@@ -15,8 +15,6 @@ class LibraryView extends StatefulWidget {
 }
 
 class _LibraryViewState extends State<LibraryView> {
-  bool _hintShownThisSession = false;
-
   @override
   Widget build(BuildContext context) {
     final savedBookProvider = Provider.of<AllStateProvider>(context);

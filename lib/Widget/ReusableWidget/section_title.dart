@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:readly/View/viewallpage/presentation/viewall_screen.dart';
 
 class SectionTitle extends StatelessWidget {
@@ -31,7 +32,12 @@ class SectionTitle extends StatelessWidget {
       textBaseline: TextBaseline.alphabetic,
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Text(title, style: Theme.of(context).textTheme.bodyLarge),
+        Text(
+          title,
+          style: Theme.of(
+            context,
+          ).textTheme.bodyLarge!.copyWith(fontSize: 30.sp),
+        ),
 
         TextButton(
           onPressed: () {

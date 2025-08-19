@@ -7,11 +7,11 @@ class ShimmerNameLoading extends StatelessWidget {
   final double borderRadius;
 
   const ShimmerNameLoading({
-    Key? key,
+    super.key,
     required this.width,
     required this.height,
     this.borderRadius = 5,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
