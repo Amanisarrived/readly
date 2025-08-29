@@ -58,7 +58,7 @@ class DefaultFirebaseOptions {
 
   static const FirebaseOptions android = FirebaseOptions(
     apiKey: 'AIzaSyDtFIIzclcs7yAkyzFrPwxxjxkqwfbwHwY',
-    appId: '1:591594879923:android:8ac49c8686cbf36cd529c6',
+    appId: '1:591594879923:android:09ad91dc1838e93fd529c6',
     messagingSenderId: '591594879923',
     projectId: 'shoppinglist-823a2',
     databaseURL: 'https://shoppinglist-823a2-default-rtdb.firebaseio.com',
@@ -72,6 +72,9 @@ class DefaultFirebaseOptions {
     projectId: 'shoppinglist-823a2',
     databaseURL: 'https://shoppinglist-823a2-default-rtdb.firebaseio.com',
     storageBucket: 'shoppinglist-823a2.firebasestorage.app',
+    androidClientId: '591594879923-lq2g7i8cb12jsuu8lupma9g1j95ij5p1.apps.googleusercontent.com',
+    iosClientId: '591594879923-g70fahpb4brdragepaolfh05824tiiga.apps.googleusercontent.com',
     iosBundleId: 'com.example.readly',
   );
+
 }

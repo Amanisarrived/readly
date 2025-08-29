@@ -91,14 +91,16 @@ class _HomeScreenState extends State<HomeScreen> {
               children: [
                 userName == null
                     ? ShimmerNameLoading(width: 90.w, height: 18.h)
-                    : Text(
-                        "Hello $userName",
-                        style: Theme.of(
-                          context,
-                        ).textTheme.bodyLarge!.copyWith(fontSize: 25.sp),
+                    : FittedBox(
+                        child: Text(
+                          "Hello $userName",
+                          style: Theme.of(
+                            context,
+                          ).textTheme.bodyLarge!.copyWith(fontSize: 18.sp),
+                        ),
                       ),
                 SizedBox(width: 10.w),
-                Icon(Iconsax.user_tick4, size: 23.sp),
+                Icon(Iconsax.user_tick4, size: 18.sp),
                 const Spacer(),
                 CircleAvatar(
                   radius: 25,

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:provider/provider.dart';
 import 'package:readly/View/screen_navigation.dart';
 import 'package:readly/provider/auth_provider.dart';
@@ -24,7 +25,10 @@ class Socialicons extends StatelessWidget {
             }
           },
           child: authProvider.isgoogleloginLoading
-              ? const CircularProgressIndicator()
+              ? LoadingAnimationWidget.threeArchedCircle(
+                  color: Theme.of(context).primaryColor,
+                  size: 40.sp,
+                )
               : Container(
                   height: 70,
                   width: 110,

@@ -50,7 +50,7 @@ class SearchResultTile extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: 190.w,
+                  width: 150.w,
                   child: Text(
                     title,
                     style: TextStyle(

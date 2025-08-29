@@ -7,28 +7,33 @@ class SettingTile extends StatelessWidget {
     required this.icon,
     required this.title,
     required this.tralingIcon,
+    required this.onTap,
     super.key,
   });
 
   final IconData icon;
   final String title;
   final IconData tralingIcon;
+  final void Function() onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Icon(icon, size: 25.sp, color: const Color(0xff595959)),
-        Gap(10.w),
-        Text(
-          title,
-          style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
-        ),
-        const Spacer(),
-        Icon(tralingIcon, size: 25.sp, color: Theme.of(context).primaryColor),
-      ],
+    return GestureDetector(
+      onTap: onTap,
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Icon(icon, size: 25.sp, color: const Color(0xff595959)),
+          Gap(10.w),
+          Text(
+            title,
+            style: TextStyle(fontSize: 14.sp, fontWeight: FontWeight.w600),
+          ),
+          const Spacer(),
+          Icon(tralingIcon, size: 25.sp, color: Theme.of(context).primaryColor),
+        ],
+      ),
     );
   }
 }

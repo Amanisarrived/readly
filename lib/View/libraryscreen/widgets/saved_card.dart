@@ -124,6 +124,7 @@ class SavedCard extends StatelessWidget {
 
                         SizedBox(height: 10.h),
                         LibraryBtn(
+                          book: book,
                           onPressed: () {
                             if (allreadyInCart) {
                               ScaffoldMessenger.of(context).showSnackBar(

@@ -8,18 +8,18 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:591594879923:android:8ac49c8686cbf36cd529c6",
+        "mobilesdk_app_id": "1:591594879923:android:09ad91dc1838e93fd529c6",
         "android_client_info": {
-          "package_name": "com.example.readly"
+          "package_name": "com.readlyaman.app"
         }
       },
       "oauth_client": [
         {
-          "client_id": "591594879923-lq2g7i8cb12jsuu8lupma9g1j95ij5p1.apps.googleusercontent.com",
+          "client_id": "591594879923-ndvec3n0empv34muo67edc5qbkp21lj0.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
-            "package_name": "com.example.readly",
-            "certificate_hash": "87ad4d68827ad57047093e09fe00c8022653afce"
+            "package_name": "com.readlyaman.app",
+            "certificate_hash": "c4594b9bc3b38a8c87158e37dab0cf1d4b684d2d"
           }
         },
         {

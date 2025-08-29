@@ -36,7 +36,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
       children: [
         Expanded(
           child: Container(
-            height: 50.h,
+            height: 55.h,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(40.r),
               border: Border.all(
@@ -88,8 +88,8 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         ),
         SizedBox(width: 10.w),
         Container(
-          height: 50.h,
-          width: 50.h,
+          height: 55.h,
+          width: 55.h,
           decoration: BoxDecoration(
             shape: BoxShape.circle,
             border: Border.all(color: Theme.of(context).cardColor, width: 2),

@@ -76,32 +76,30 @@ class GridCard extends StatelessWidget {
                         borderRadius: BorderRadius.circular(10.r),
                       ),
                       height: 149.h,
-                      width: 110.w,
+                      width: 90.w,
                       child: ClipRRect(
                         borderRadius: BorderRadiusGeometry.circular(10.r),
-                        child: Image.network(
-                          imageUrl,
-                          width: 200.w,
-                          fit: BoxFit.cover,
-                        ),
+                        child: Image.network(imageUrl, fit: BoxFit.cover),
                       ),
                     ),
                   ),
                   SizedBox(height: 10.h),
                   Padding(
-                    padding: EdgeInsets.symmetric(horizontal: 30.w),
+                    padding: EdgeInsets.only(right: 30.w, left: 12.w),
                     child: SizedBox(
                       height: 170.h,
-                      width: 150.w,
+                      width: 187.w,
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                            maxLines: 2,
+                            overflow: TextOverflow.ellipsis,
                             title,
                             style: Theme.of(
                               context,
-                            ).textTheme.bodyLarge!.copyWith(fontSize: 16.sp),
+                            ).textTheme.bodyLarge!.copyWith(fontSize: 13.sp),
                           ),
 
                           Gap(10.h),
@@ -110,7 +108,7 @@ class GridCard extends StatelessWidget {
                             author,
                             style: Theme.of(
                               context,
-                            ).textTheme.bodyMedium!.copyWith(fontSize: 15.sp),
+                            ).textTheme.bodyMedium!.copyWith(fontSize: 12.sp),
                           ),
 
                           Gap(10.h),
@@ -119,7 +117,7 @@ class GridCard extends StatelessWidget {
                             releaseDate,
                             style: Theme.of(
                               context,
-                            ).textTheme.bodyMedium!.copyWith(fontSize: 15.sp),
+                            ).textTheme.bodyMedium!.copyWith(fontSize: 10.sp),
                           ),
 
                           Gap(10.h),

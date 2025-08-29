@@ -64,12 +64,9 @@ class _AuthorWidgetState extends State<AuthorWidget> {
                   ),
                 ],
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(8),
-                child: const BannerWidget(
-                  fileName: "author_poster (1).png",
-                  folderName: "Author",
-                ),
+              child: const BannerWidget(
+                fileName: "author_poster.png",
+                folderName: "Author",
               ),
             ),
 

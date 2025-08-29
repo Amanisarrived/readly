@@ -11,7 +11,7 @@ class SearchingService {
       'drama',
       'selfhelp',
       'thriller',
-      'colleenhover',
+      'colleenHover',
       'jkrowling',
     ];
 

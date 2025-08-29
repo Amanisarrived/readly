@@ -22,7 +22,6 @@ class SimpleEpubReader extends StatefulWidget {
 class _SimpleEpubReaderState extends State<SimpleEpubReader> {
   EpubController? _controller;
   bool isLoading = true;
-  File? tempFile;
 
   @override
   void initState() {
@@ -33,23 +32,21 @@ class _SimpleEpubReaderState extends State<SimpleEpubReader> {
   @override
   void dispose() {
     _controller?.dispose();
-    tempFile?.delete();
     super.dispose();
   }
 
   Future<void> _loadEpub() async {
     try {
       final response = await http.get(Uri.parse(widget.epubUrl));
-      if (response.statusCode != 200)
+      if (response.statusCode != 200) {
         throw Exception('Failed to download EPUB');
-
-      final file = File('${Directory.systemTemp.path}/${widget.title}.epub');
-      await file.writeAsBytes(response.bodyBytes, flush: true);
+      }
 
       setState(() {
-        tempFile = file;
-        // Pass the Future<EpubBook> directly
-        _controller = EpubController(document: EpubDocument.openFile(file));
+        // ✅ load directly from bytes, no File conversion
+        _controller = EpubController(
+          document: EpubDocument.openData(response.bodyBytes),
+        );
         isLoading = false;
       });
     } catch (e) {

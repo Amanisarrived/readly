@@ -6,6 +6,7 @@ import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:iconsax/iconsax.dart';
 import 'package:lottie/lottie.dart';
 import 'package:provider/provider.dart';
+import 'package:readly/View/bookdetailsscreen/presentation/book_details.dart';
 import 'package:readly/View/cartscreen/widget/cart_card.dart';
 import 'package:readly/provider/state_provider.dart';
 
@@ -137,13 +138,31 @@ class CartView extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              child: CartCard(
-                                imageUrl: book.imageUrl,
-                                title: book.title,
-                                author: book.author,
-                                catogery: book.catogery,
-                                bookUrl: book.bookUrl,
-                                book: book,
+                              child: GestureDetector(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => BookDetails(
+                                        author: book.author,
+                                        imageUrl: book.imageUrl,
+                                        title: book.title,
+                                        releaseDate: book.releaseDate,
+                                        rating: book.rating,
+                                        description: book.description,
+                                        book: book,
+                                      ),
+                                    ),
+                                  );
+                                },
+                                child: CartCard(
+                                  imageUrl: book.imageUrl,
+                                  title: book.title,
+                                  author: book.author,
+                                  catogery: book.catogery,
+                                  bookUrl: book.bookUrl,
+                                  book: book,
+                                ),
                               ),
                             ),
                           );

@@ -47,12 +47,9 @@ class _FreeWidgetState extends State<FreeWidget> {
                   ),
                 ],
               ),
-              child: ClipRRect(
-                borderRadius: BorderRadius.circular(0),
-                child: const BannerWidget(
-                  fileName: "free_banner.png",
-                  folderName: "Free",
-                ),
+              child: const BannerWidget(
+                fileName: "free_banner.png",
+                folderName: "Free",
               ),
             ),
 
@@ -62,7 +59,7 @@ class _FreeWidgetState extends State<FreeWidget> {
             Padding(
               padding: EdgeInsets.symmetric(horizontal: 10.w),
               child: const SectionTitle(
-                title: "Free Books",
+                title: "Top Free Books",
                 actionText: "View All",
                 collectionName: "freebooks",
               ),

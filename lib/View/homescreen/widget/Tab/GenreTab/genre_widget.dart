@@ -69,9 +69,12 @@ class _GenreWidgetState extends State<GenreWidget> {
                   ),
                 ],
               ),
-              child: const BannerWidget(
-                folderName: "Genre",
-                fileName: "genre_poster.png",
+              child: ClipRRect(
+                borderRadius: BorderRadiusGeometry.circular(12.r),
+                child: const BannerWidget(
+                  folderName: "Genre",
+                  fileName: "genre_poster.png",
+                ),
               ),
             ),
 

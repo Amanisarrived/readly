@@ -1,4 +1,4 @@
-package com.example.readly
+package com.readlyaman.app
 
 import io.flutter.embedding.android.FlutterActivity
 
